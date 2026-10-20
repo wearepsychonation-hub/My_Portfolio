@@ -22,24 +22,33 @@ type ScheduleBoardProps = {
 
 const noop = () => () => {};
 
-export function ScheduleBoard({ header, gyms, slots, today: pinned }: ScheduleBoardProps) {
+export function ScheduleBoard({
+  header,
+  gyms,
+  slots: allSlots,
+  today: pinned,
+}: ScheduleBoardProps) {
   const [filter, setFilter] = useState<GymFilter>("all");
   const clientToday = useSyncExternalStore(noop, currentDayKey, () => null);
   const today = pinned ?? clientToday;
 
   const gymById = new Map(gyms.map((g) => [g.id, g]));
+  // A session whose gym isn't published can't be shown, so it mustn't count toward a day either.
+  const slots = allSlots.filter((s) => gymById.has(s.gym));
   const filteredGym = filter === "all" ? undefined : gymById.get(filter);
   const tabs = [{ id: "all", name: "All" }, ...gyms];
 
   const renderDay = (day: DayKey, layout: "column" | "row") => {
     const list = slotsForDay(slots, day, filter);
     if (!list.length) return <OffDay text={offDayText(slots, day, filteredGym)} layout={layout} />;
-    return list.map((s) => {
-      const gym = gymById.get(s.gym);
-      return gym ? (
-        <Slot key={`${s.day}-${s.start}-${s.gym}`} slot={s} gym={gym} layout={layout} />
-      ) : null;
-    });
+    return list.map((s) => (
+      <Slot
+        key={`${s.day}-${s.start}-${s.gym}`}
+        slot={s}
+        gym={gymById.get(s.gym)!}
+        layout={layout}
+      />
+    ));
   };
 
   const todayLabel = (
@@ -130,7 +139,12 @@ export function ScheduleBoard({ header, gyms, slots, today: pinned }: ScheduleBo
           </span>
         </div>
 
-        <div className="mt-8 grid gap-3 sm:mt-12 md:grid-cols-3">
+        <div
+          className={cn(
+            "mt-8 grid gap-3 sm:mt-12",
+            gyms.length >= 3 ? "md:grid-cols-3" : "md:grid-cols-2",
+          )}
+        >
           {gyms
             .filter((g) => filter === "all" || g.id === filter)
             .map((g) => (
