@@ -1,6 +1,6 @@
 import { ClockIcon } from "@sanity/icons/Clock";
 import { defineField, defineType } from "sanity";
-import { DAYS } from "@/lib/schedule";
+import { DAYS, formatTimeRange } from "@/lib/schedule";
 
 export const DAY_OPTIONS = DAYS.map((d) => ({ title: d.long, value: d.key }));
 
@@ -21,7 +21,7 @@ export const session = defineType({
     defineField({
       name: "start",
       type: "string",
-      description: "24-hour time, for example 06:00 or 17:30.",
+      description: "24-hour time, for example 06:00 or 17:30. The site shows 6:00 AM, 5:30 PM.",
       validation: (rule) =>
         rule.required().regex(TIME, { name: "HH:mm" }).error("Use HH:mm, e.g. 06:00"),
     }),
@@ -83,7 +83,7 @@ export const session = defineType({
       full: "fullyBooked",
     },
     prepare: ({ day, start, end, gym, type, full }) => ({
-      title: `${DAYS.find((d) => d.key === day)?.short ?? "New"} ${start ?? "--:--"}–${end ?? "--:--"}`,
+      title: `${DAYS.find((d) => d.key === day)?.short ?? "New"} ${start && end ? formatTimeRange(start, end).label : "(no time)"}`,
       subtitle: [gym, type, full && "Fully booked"].filter(Boolean).join(" · "),
     }),
   },

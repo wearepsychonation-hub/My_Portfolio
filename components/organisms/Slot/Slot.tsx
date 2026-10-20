@@ -1,6 +1,6 @@
 import { Icon } from "@/components/atoms/Icon";
 import { cn } from "@/lib/cn";
-import { DAYS, TONE_FILL } from "@/lib/schedule";
+import { DAYS, formatTimeRange, TONE_FILL } from "@/lib/schedule";
 import type { Gym, Slot as SlotData } from "@/types/schedule";
 
 type SlotProps = {
@@ -12,7 +12,7 @@ type SlotProps = {
 
 export function Slot({ slot, gym, layout = "column" }: SlotProps) {
   const row = layout === "row";
-  const time = `${slot.start}–${slot.end}`;
+  const time = formatTimeRange(slot.start, slot.end);
   const type = slot.full ? `${slot.type} · Fully booked` : slot.type;
 
   const className = cn(
@@ -20,7 +20,7 @@ export function Slot({ slot, gym, layout = "column" }: SlotProps) {
     TONE_FILL[gym.tone],
     gym.tone === "solid" ? "text-paper" : "text-ink",
     row
-      ? "grid grid-cols-[112px_minmax(0,1fr)] gap-x-2 gap-y-0.5 p-2 pr-5"
+      ? "grid grid-cols-[128px_minmax(0,1fr)] gap-x-2 gap-y-0.5 p-2 pr-5"
       : "flex min-h-14 flex-col gap-0.5 p-1.5",
     slot.full ? "slot-hatch cursor-not-allowed" : gym.tone === "outline" && "hover:bg-off-white",
   );
@@ -35,7 +35,8 @@ export function Slot({ slot, gym, layout = "column" }: SlotProps) {
           slot.full && "line-through decoration-2",
         )}
       >
-        {time}
+        {time.range}
+        <span className="ml-0.5 label-s">{time.period}</span>
       </span>
       {/* 13px (12px at <=1100px) keeps gym names to one line in a 7-column week. */}
       <span className="text-[12px] leading-[1.3] font-semibold lg:text-[13px]">{gym.name}</span>
@@ -50,7 +51,7 @@ export function Slot({ slot, gym, layout = "column" }: SlotProps) {
       href={gym.bookUrl}
       className={className}
       // The visual day is the column or row heading; links read out of context need it spelled out.
-      aria-label={`Book ${slot.type} at ${gym.name}, ${DAYS.find((d) => d.key === slot.day)?.long} ${time}`}
+      aria-label={`Book ${slot.type} at ${gym.name}, ${DAYS.find((d) => d.key === slot.day)?.long} ${time.label}`}
     >
       {content}
       <Icon

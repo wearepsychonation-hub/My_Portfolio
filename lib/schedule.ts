@@ -19,6 +19,23 @@ export const TONE_FILL: Record<GymTone, string> = {
   tint: "border-mist bg-mist",
 };
 
+/** "06:00" → 6:00 AM. Data stays 24h ("HH:mm") so it sorts and validates as plain text. */
+function to12h(hhmm: string) {
+  const [h = 0, m = 0] = hhmm.split(":").map(Number);
+  return { time: `${h % 12 || 12}:${String(m).padStart(2, "0")}`, period: h < 12 ? "AM" : "PM" };
+}
+
+/**
+ * A 12-hour range with AM/PM said once when both ends share it:
+ * "06:00"–"07:00" → { range: "6:00–7:00", period: "AM" }; "11:30"–"12:30" → "11:30 AM–12:30", "PM".
+ */
+export function formatTimeRange(start: string, end: string) {
+  const s = to12h(start);
+  const e = to12h(end);
+  const range = s.period === e.period ? `${s.time}–${e.time}` : `${s.time} ${s.period}–${e.time}`;
+  return { range, period: e.period, label: `${range} ${e.period}` };
+}
+
 /** The viewer's weekday. Client only: the server can't know the viewer's timezone. */
 export function currentDayKey(): DayKey {
   // getDay() is 0 for Sunday; DAYS starts on Monday.
