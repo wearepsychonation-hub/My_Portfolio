@@ -98,9 +98,4 @@ Publish any change in the Studio and reload the site: it should show immediately
 
 ## Before launch
 
-- [ ] Replace every bracketed placeholder (name, city, contact details, gyms, addresses, links)
-- [ ] Testimonials are real, attributed client quotes, published with permission
-- [ ] Real training photography uploaded for the hero, band, testimonials, about, gallery and each gym, all with alt text. Photos render in grayscale.
-- [ ] Prefer darker photos behind the testimonials and About text. The overlay keeps headlines readable, but small light-gray text can lose contrast over very bright areas.
-- [ ] Share image and SEO title/description set in Site settings
-- [ ] `NEXT_PUBLIC_SITE_URL` set to the final domain
+See [TODO.md](TODO.md) for the full launch checklist: what to collect from the trainer, account setup, hookup, content entry and pre-launch checks.
