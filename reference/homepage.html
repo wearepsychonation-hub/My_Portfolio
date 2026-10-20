@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[NAME] — Homepage reference</title>
+<style>@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap");
+
+/* Fallbacks only. :where() has zero specificity, so the page's tokens.css always wins. */
+:where(:root) {
+  --ink: #000000; --charcoal: #1c1c1c; --graphite: #262626; --body: #333333; --muted: #5c5c5c;
+  --paper: #ffffff; --off-white: #fcfcfc; --mist: #ededed; --hairline: #dcdcdc;
+  --on-dark: #ffffff; --on-dark-muted: #bdbdbd; --overlay: rgba(0,0,0,.45); --overlay-strong: rgba(0,0,0,.55); --signal: #2f6b4f;
+  --space-half: 4px; --space-1: 8px; --space-2: 16px; --space-3: 24px; --space-4: 32px; --space-6: 48px; --space-8: 64px; --space-12: 96px; --space-16: 128px;
+  --radius-none: 0px; --radius-dot: 50%;
+  --font-display: Archivo, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-body: "Open Sans", Ubuntu, "Helvetica Neue", Arial, sans-serif;
+}
+
+html, body { margin: 0; }
+.pt { font-family: var(--font-body); font-size: 16px; line-height: 1.65; color: var(--body); background: var(--paper); -webkit-font-smoothing: antialiased; }
+.pt *, .pt *::before, .pt *::after { box-sizing: border-box; }
+.pt p { margin: 0; }
+.pt img { display: block; max-width: 100%; }
+.pt-icon { display: block; flex: none; }
+
+/* ---------- type ---------- */
+.pt h1, .pt h2, .pt h3 { margin: 0; font-family: var(--font-display); font-weight: 800; color: var(--ink); letter-spacing: -0.02em; }
+.pt-h1 { font-size: 96px; line-height: .9; }
+.pt-h2 { font-size: 48px; line-height: .95; }
+.pt-h3 { font-size: 24px; line-height: 1.05; letter-spacing: -0.01em !important; }
+.pt-label, .pt-eyebrow { font-family: var(--font-body); font-size: 11px; line-height: 1.4; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.pt-label-s { font-family: var(--font-body); font-size: 10px; line-height: 1.4; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.pt-eyebrow { display: block; color: var(--ink); margin-bottom: var(--space-2); }
+.pt-em { font-style: italic; font-size: 18px; line-height: 1.5; color: var(--ink); }
+.pt-lead { font-size: 18px; line-height: 1.6; }
+.pt-text-s { font-size: 14px; line-height: 1.6; }
+.pt-muted { color: var(--muted); }
+.pt-dark, .pt-photo { color: var(--on-dark-muted); }
+.pt-dark h1, .pt-dark h2, .pt-dark h3, .pt-photo h1, .pt-photo h2, .pt-photo h3,
+.pt-dark .pt-em, .pt-photo .pt-em, .pt-dark .pt-eyebrow, .pt-photo .pt-eyebrow { color: var(--on-dark); }
+
+/* ---------- layout ---------- */
+.pt-container { width: 100%; max-width: 1312px; margin: 0 auto; padding: 0 var(--space-8); }
+.pt-section { padding: var(--space-16) 0; }
+.pt-bg-paper { background: var(--paper); }
+.pt-bg-off { background: var(--off-white); }
+.pt-dark { background: var(--charcoal); }
+.pt-head { max-width: 640px; margin-bottom: var(--space-6); }
+.pt-head .pt-em { margin-top: var(--space-2); }
+
+/* ---------- buttons & links ---------- */
+.pt-btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--space-1); padding: 10px 30px; border: 1px solid transparent; border-radius: var(--radius-none);
+  font-family: var(--font-body); font-size: 11px; line-height: 1.4; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; white-space: nowrap; cursor: pointer;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease; }
+.pt-btn--light { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+.pt-btn--light:hover { background: var(--ink); color: var(--paper); border-color: var(--paper); }
+.pt-btn--dark { background: var(--graphite); color: var(--paper); border-color: var(--graphite); }
+.pt-btn--dark:hover { background: var(--paper); color: var(--graphite); border-color: var(--graphite); }
+.pt-btn--sm { padding: 8px 20px; font-size: 10px; }
+.pt-btn[aria-disabled="true"], .pt-btn:disabled { opacity: 1; background: var(--mist); color: var(--muted); border-color: var(--mist); cursor: not-allowed; }
+.pt :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.pt-dark :focus-visible, .pt-photo :focus-visible, .pt-nav :focus-visible, .pt-ticker :focus-visible { outline-color: var(--paper); }
+.pt-link { display: inline-flex; align-items: center; gap: 6px; padding-bottom: 2px; border-bottom: 1px solid currentColor; color: var(--ink); text-decoration: none;
+  font-size: 11px; line-height: 1.4; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.pt-link .pt-icon { transition: transform .2s ease; }
+.pt-link:hover .pt-icon { transform: translateX(3px); }
+
+/* ---------- photo placeholders (swap for real photography) ---------- */
+.pt-ph { position: relative; overflow: hidden; background-color: #2e2e2e;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    radial-gradient(120% 90% at 70% 30%, #6a6a6a 0%, #3a3a3a 45%, #161616 100%);
+  background-size: 160px 160px, cover; }
+.pt-ph--b { background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    linear-gradient(160deg, #1a1a1a 0%, #4d4d4d 50%, #202020 100%); }
+.pt-ph--c { background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    radial-gradient(90% 120% at 20% 80%, #5e5e5e 0%, #2c2c2c 55%, #111 100%); }
+.pt-ph__cap { position: absolute; left: var(--space-2); bottom: 12px; z-index: 3; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.72); pointer-events: none; }
+.pt-photo { position: relative; isolation: isolate; }
+.pt-photo::before { content: ""; position: absolute; inset: 0; background: var(--overlay); z-index: 1; }
+.pt-photo--strong::before { background: var(--overlay-strong); }
+.pt-photo > * { position: relative; z-index: 2; }
+.pt-photo > .pt-ph__cap { position: absolute; left: auto; right: var(--space-3); bottom: var(--space-2); }
+
+/* ---------- nav ---------- */
+.pt-nav { position: sticky; top: 0; z-index: 50; background: var(--charcoal); color: var(--on-dark); }
+.pt-nav__bar { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.pt-wordmark { font-family: var(--font-display); font-weight: 800; font-size: 15px; line-height: 1; letter-spacing: .16em; text-transform: uppercase; color: var(--on-dark); text-decoration: none; }
+.pt-nav__links { display: flex; align-items: center; gap: var(--space-4); list-style: none; margin: 0; padding: 0; }
+.pt-nav__links a:not(.pt-btn) { color: var(--on-dark-muted); text-decoration: none; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; transition: color .2s; }
+.pt-nav__links a:not(.pt-btn):hover { color: var(--on-dark); }
+.pt-nav__toggle { display: none; background: none; border: 0; color: var(--on-dark); padding: var(--space-1); margin-right: calc(var(--space-1) * -1); cursor: pointer; }
+.pt-nav__panel { display: none; border-top: 1px solid var(--graphite); }
+.pt-nav__panel ul { list-style: none; margin: 0; padding: var(--space-2) 0 var(--space-3); }
+.pt-nav__panel li a:not(.pt-btn) { display: block; padding: 12px 0; color: var(--on-dark); text-decoration: none; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; border-bottom: 1px solid var(--graphite); }
+.pt-nav__panel li:last-child { padding-top: var(--space-3); }
+.pt-nav.is-open .pt-nav__panel { display: block; }
+
+/* ---------- hero ---------- */
+.pt-hero { min-height: 760px; display: flex; align-items: flex-end; padding: var(--space-16) 0 var(--space-12); color: var(--on-dark); }
+.pt-hero h1 { max-width: 900px; }
+.pt-hero .pt-em { margin-top: var(--space-3); font-size: 20px; }
+.pt-hero .pt-btn { margin-top: var(--space-4); }
+
+/* ---------- ticker ---------- */
+.pt-ticker { background: var(--ink); color: var(--on-dark); }
+.pt-ticker__row { display: flex; align-items: center; justify-content: center; gap: 12px; height: 44px; }
+
+/* ---------- statement ---------- */
+.pt-statement__grid { display: grid; grid-template-columns: 7fr 5fr; gap: var(--space-12); align-items: end; }
+.pt-statement__body { display: grid; gap: var(--space-3); justify-items: start; }
+
+/* ---------- photo band ---------- */
+.pt-band { min-height: 520px; display: flex; align-items: center; color: var(--on-dark); }
+.pt-band__row { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-6); }
+.pt-band h2 { font-size: 72px; line-height: .9; max-width: 720px; }
+.pt-band .pt-em { margin-top: var(--space-2); }
+
+/* ---------- contact ---------- */
+.pt-contact__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-3); }
+.pt-card { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-2); padding: var(--space-4); background: var(--paper); border: 1px solid var(--hairline); transition: border-color .2s ease; min-height: 280px; }
+.pt-card:hover { border-color: var(--ink); }
+.pt-card .pt-icon { color: var(--ink); margin-bottom: var(--space-1); }
+.pt-card .pt-btn { margin-top: auto; }
+
+/* ---------- testimonial ---------- */
+.pt-quote { min-height: 600px; display: flex; align-items: center; text-align: center; color: var(--on-dark); }
+.pt-quote__stage { position: relative; display: grid; justify-items: center; gap: var(--space-4); padding: 0 var(--space-12); }
+.pt-quote blockquote { margin: 0; max-width: 860px; font-style: italic; font-weight: 300; font-size: 32px; line-height: 1.35; color: var(--on-dark); transition: opacity .35s ease; }
+.pt-quote cite { font-style: normal; color: var(--on-dark-muted); transition: opacity .35s ease; }
+.pt-quote.is-fading blockquote, .pt-quote.is-fading cite { opacity: 0; }
+.pt-quote__arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 56px; height: 56px; display: grid; place-items: center; background: none; border: 0; color: var(--on-dark); cursor: pointer; opacity: .8; transition: opacity .2s; }
+.pt-quote__arrow:hover { opacity: 1; }
+.pt-quote__arrow--prev { left: 0; } .pt-quote__arrow--next { right: 0; }
+.pt-quote__count { color: var(--on-dark-muted); }
+
+/* ---------- about ---------- */
+.pt-about { padding: var(--space-16) 0; color: var(--on-dark-muted); }
+.pt-about__grid { display: grid; grid-template-columns: 5fr 7fr; gap: var(--space-12); }
+.pt-about__bio { display: grid; gap: var(--space-3); font-size: 17px; line-height: 1.75; }
+.pt-about__bio .pt-em { color: var(--on-dark); }
+.pt-gallery { padding: var(--space-1) 0; }
+.pt-gallery__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-1); padding: 0 var(--space-1); }
+.pt-gallery__grid .pt-ph { aspect-ratio: 1 / 1; }
+
+/* ---------- footer ---------- */
+.pt-footer { padding: var(--space-8) 0; }
+.pt-footer__row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); flex-wrap: wrap; }
+.pt-footer a:not(.pt-wordmark) { color: var(--on-dark-muted); text-decoration: none; }
+.pt-footer a:not(.pt-wordmark):hover { color: var(--on-dark); }
+.pt-footer__links { display: flex; gap: var(--space-3); }
+
+/* ---------- schedule ---------- */
+.pt-sched__top { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; margin-bottom: var(--space-6); }
+.pt-sched__top .pt-head { margin-bottom: 0; }
+.pt-tabs { display: flex; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+.pt-tab { flex: none; margin-left: -1px; padding: 10px 20px; background: var(--paper); color: var(--ink); border: 1px solid var(--ink); border-radius: var(--radius-none); cursor: pointer;
+  font-family: var(--font-body); font-size: 11px; line-height: 1.4; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; transition: background-color .2s, color .2s; }
+.pt-tab:first-child { margin-left: 0; }
+.pt-tab:hover { background: var(--mist); }
+.pt-tab[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+
+.pt-week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: var(--space-1); }
+.pt-day { display: flex; flex-direction: column; gap: var(--space-1); min-width: 0; }
+.pt-day__head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-half); padding: 12px 0; margin-bottom: var(--space-half); border-bottom: 2px solid var(--ink); color: var(--ink); }
+.pt-today { display: inline-flex; align-items: center; gap: 6px; color: var(--ink); }
+.pt-today::before { content: ""; width: 6px; height: 6px; border-radius: var(--radius-dot); background: var(--signal); }
+
+.pt-slot { position: relative; display: flex; flex-direction: column; gap: var(--space-half); min-height: 112px; padding: 12px; border: 1px solid var(--ink); text-decoration: none; color: var(--ink); background: var(--paper); transition: background-color .2s, color .2s; }
+.pt-slot__time { font-family: var(--font-display); font-weight: 800; font-size: 16px; line-height: 1.1; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
+.pt-slot__gym { font-size: 13px; line-height: 1.3; font-weight: 600; }
+.pt-slot__type { margin-top: auto; }
+.pt-slot__go { position: absolute; right: 10px; bottom: 10px; opacity: 0; transition: opacity .2s; }
+a.pt-slot:hover .pt-slot__go, a.pt-slot:focus-visible .pt-slot__go { opacity: 1; }
+.pt-slot--solid { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.pt-slot--outline { background: var(--paper); color: var(--ink); border-color: var(--ink); }
+.pt-slot--tint { background: var(--mist); color: var(--ink); border-color: var(--mist); }
+a.pt-slot--outline:hover { background: var(--off-white); }
+.pt-slot--full { cursor: not-allowed; background-image: repeating-linear-gradient(135deg, transparent 0 7px, rgba(128,128,128,.35) 7px 8px); }
+.pt-slot--full .pt-slot__time { text-decoration: line-through; text-decoration-thickness: 2px; }
+.pt-off { display: flex; align-items: center; justify-content: center; min-height: 112px; padding: var(--space-2); border: 1px dashed #8a8a8a; color: var(--muted); font-style: italic; font-size: 14px; line-height: 1.4; text-align: center; }
+
+.pt-legend { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-3); margin-top: var(--space-3); color: var(--muted); }
+.pt-legend__item { display: inline-flex; align-items: center; gap: var(--space-1); }
+.pt-swatch { width: 16px; height: 16px; flex: none; border: 1px solid var(--ink); }
+.pt-swatch--solid { background: var(--ink); }
+.pt-swatch--outline { background: var(--paper); }
+.pt-swatch--tint { background: var(--mist); border-color: var(--mist); }
+.pt-swatch--full { background: var(--paper) repeating-linear-gradient(135deg, transparent 0 3px, #8a8a8a 3px 4px); }
+
+.pt-daylist { display: none; border-bottom: 1px solid var(--ink); }
+.pt-dayrow { border-top: 1px solid var(--ink); }
+.pt-dayrow summary { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); padding: 18px 0; cursor: pointer; color: var(--ink); }
+.pt-dayrow summary::-webkit-details-marker { display: none; }
+.pt-dayrow summary .pt-icon { transition: transform .25s ease; }
+.pt-dayrow[open] summary .pt-icon { transform: rotate(180deg); }
+.pt-dayrow__meta { display: inline-flex; align-items: center; gap: var(--space-2); color: var(--muted); }
+.pt-dayrow__body { display: grid; gap: var(--space-1); padding-bottom: var(--space-3); }
+.pt-dayrow .pt-slot { min-height: 0; display: grid; grid-template-columns: 112px 1fr; grid-template-rows: auto auto; column-gap: var(--space-2); padding: var(--space-2); }
+.pt-dayrow .pt-slot__time { grid-row: 1 / span 2; align-self: center; }
+.pt-dayrow .pt-slot__type { margin-top: 0; }
+.pt-dayrow .pt-slot__go { opacity: 1; top: 50%; bottom: auto; transform: translateY(-50%); right: var(--space-2); }
+.pt-dayrow .pt-off { min-height: 0; justify-content: flex-start; padding: var(--space-2); }
+
+.pt-locs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); margin-top: var(--space-12); }
+.pt-loc { display: flex; flex-direction: column; border: 1px solid var(--hairline); background: var(--paper); transition: border-color .2s; }
+.pt-loc:hover { border-color: var(--ink); }
+.pt-loc .pt-ph { aspect-ratio: 16 / 10; }
+.pt-loc__body { display: flex; flex-direction: column; gap: var(--space-1); padding: var(--space-3); flex: 1; }
+.pt-loc__hood { display: inline-flex; align-items: center; gap: var(--space-1); color: var(--muted); }
+.pt-loc__actions { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); margin-top: auto; padding-top: var(--space-3); }
+
+/* ---------- motion ---------- */
+.pt-js .pt-reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s cubic-bezier(.2,.6,.2,1), transform .7s cubic-bezier(.2,.6,.2,1); }
+.pt-js .pt-reveal.is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .pt-js .pt-reveal { opacity: 1; transform: none; transition: none; }
+  .pt *, .pt *::before { transition: none !important; }
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1100px) {
+  .pt-h1 { font-size: 72px; }
+  .pt-contact__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pt-statement__grid, .pt-about__grid { gap: var(--space-6); }
+  .pt-slot__gym { font-size: 12px; }
+}
+@media (max-width: 900px) {
+  .pt-nav__links { display: none; }
+  .pt-nav__toggle { display: block; }
+  .pt-locs { grid-template-columns: 1fr; }
+  .pt-statement__grid, .pt-about__grid { grid-template-columns: 1fr; }
+  .pt-band__row { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 760px) {
+  .pt-container { padding: 0 var(--space-3); }
+  .pt-section, .pt-about { padding: var(--space-8) 0; }
+  .pt-h1 { font-size: 52px; line-height: .92; }
+  .pt-h2, .pt-band h2 { font-size: 36px; line-height: .95; }
+  .pt-hero { min-height: 640px; padding: var(--space-12) 0 var(--space-8); }
+  .pt-hero .pt-em { font-size: 18px; }
+  .pt-band { min-height: 440px; }
+  .pt-week { display: none; }
+  .pt-daylist { display: block; }
+  .pt-sched__top { margin-bottom: var(--space-4); }
+  .pt-tabs { width: calc(100% + var(--space-6)); margin: 0 calc(var(--space-3) * -1); padding: 0 var(--space-3); }
+  .pt-locs { margin-top: var(--space-8); }
+  .pt-contact__grid { grid-template-columns: 1fr; }
+  .pt-card { min-height: 0; }
+  .pt-card .pt-btn { margin-top: var(--space-1); }
+  .pt-quote { min-height: 560px; }
+  .pt-quote__stage { padding: 0; padding-bottom: 72px; }
+  .pt-quote blockquote { font-size: 22px; }
+  .pt-quote__arrow { top: auto; bottom: 0; transform: none; }
+  .pt-quote__arrow--prev { left: calc(50% - 88px); } .pt-quote__arrow--next { right: calc(50% - 88px); }
+  .pt-gallery__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pt-footer__row { flex-direction: column; align-items: flex-start; }
+}
+
+/* forced states for documentation previews */
+.pt-btn--light.is-hover { background: var(--ink); color: var(--paper); border-color: var(--paper); }
+.pt-btn--dark.is-hover { background: var(--paper); color: var(--graphite); border-color: var(--graphite); }
+</style></head>
+<body><div id="root"></div>
+<script>/* [NAME] Training — vanilla component bundle. Assigns window.Trainer. No dependencies, no network. */
+(function () {
+  "use strict";
+
+  /* ---------------- icons: 24px grid, 1.5px square-cap line ---------------- */
+  var ICONS = {
+    pin: '<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/>',
+    phone: '<path d="M5 3.5h3.2l1.6 4.2-2 1.3a11 11 0 0 0 7.2 7.2l1.3-2 4.2 1.6V19a1.5 1.5 0 0 1-1.5 1.5A16.5 16.5 0 0 1 3.5 5 1.5 1.5 0 0 1 5 3.5z"/>',
+    chat: '<path d="M4 4.5h16v11H10l-6 4.5v-15.5z"/><path d="M8 9h8M8 12h5"/>',
+    mail: '<rect x="3" y="5.5" width="18" height="13"/><path d="M3 6.5l9 6.5 9-6.5"/>',
+    camera: '<rect x="3" y="7" width="18" height="13"/><path d="M8.5 7l1.5-2.5h4L15.5 7"/><circle cx="12" cy="13.5" r="3.5"/>',
+    menu: '<path d="M3 7h18M3 12h18M3 17h18"/>',
+    close: '<path d="M5 5l14 14M19 5L5 19"/>',
+    chevL: '<path d="M15 3l-9 9 9 9"/>',
+    chevR: '<path d="M9 3l9 9-9 9"/>',
+    chevD: '<path d="M5 9l7 7 7-7"/>',
+    arrow: '<path d="M4 12h15M13 6l6 6-6 6"/>'
+  };
+  function icon(name, size, stroke) {
+    size = size || 24;
+    return '<svg class="pt-icon" width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="' + (stroke || 1.5) +
+      '" stroke-linecap="square" stroke-linejoin="miter" aria-hidden="true">' + (ICONS[name] || "") + "</svg>";
+  }
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  function ph(variant, caption, extra) {
+    return '<div class="pt-ph' + (variant ? " pt-ph--" + variant : "") + (extra ? " " + extra : "") + '" role="img" aria-label="' + esc(caption) + '"><span class="pt-ph__cap">Photo · ' + esc(caption) + "</span></div>";
+  }
+
+  /* ---------------- sample content: edit here ---------------- */
+  var SAMPLE = {
+    brand: {
+      name: "[NAME]", city: "[CITY]",
+      phone: "[000 000 0000]", whatsapp: "[000 000 0000]", email: "hello@[domain].com", instagram: "@[handle]",
+      bookUrl: "#contact"
+    },
+    // tone: "solid" | "outline" | "tint" — the only way gyms are told apart. Max three gyms.
+    gyms: [
+      { id: "a", name: "[GYM A]", neighborhood: "[Neighborhood A]", address: "[Street address], [CITY]", tone: "solid", directionsUrl: "#", bookUrl: "#" },
+      { id: "b", name: "[GYM B]", neighborhood: "[Neighborhood B]", address: "[Street address], [CITY]", tone: "outline", directionsUrl: "#", bookUrl: "#" },
+      { id: "c", name: "[GYM C]", neighborhood: "[Neighborhood C]", address: "[Street address], [CITY]", tone: "tint", directionsUrl: "#", bookUrl: "#" }
+    ],
+    // day: mon..sun · type: "1-1" | "Group" · full: true marks Fully booked
+    slots: [
+      { day: "mon", start: "06:00", end: "07:00", gym: "a", type: "1-1" },
+      { day: "mon", start: "12:15", end: "13:00", gym: "b", type: "Group" },
+      { day: "mon", start: "18:00", end: "19:00", gym: "a", type: "Group" },
+      { day: "tue", start: "07:00", end: "08:00", gym: "c", type: "1-1", full: true },
+      { day: "tue", start: "17:30", end: "18:30", gym: "b", type: "1-1" },
+      { day: "wed", start: "06:00", end: "07:00", gym: "a", type: "1-1" },
+      { day: "wed", start: "18:00", end: "19:00", gym: "c", type: "Group" },
+      { day: "thu", start: "07:00", end: "08:00", gym: "b", type: "1-1" },
+      { day: "thu", start: "12:15", end: "13:00", gym: "a", type: "Group", full: true },
+      { day: "fri", start: "06:00", end: "07:00", gym: "c", type: "1-1" },
+      { day: "sat", start: "09:00", end: "10:00", gym: "b", type: "Group" },
+      { day: "sat", start: "10:30", end: "11:30", gym: "a", type: "Group" }
+    ],
+    // Placeholders: replace with real, attributed client testimonials before launch.
+    testimonials: [
+      { quote: "[Client testimonial.] No noise, no fads. Just a plan that fit my week, and someone who noticed every rep.", name: "[CLIENT NAME]", detail: "1-1 client" },
+      { quote: "[Client testimonial.] I came for the deadlift. I stayed because the group became the best hour of my week.", name: "[CLIENT NAME]", detail: "Small group" },
+      { quote: "[Client testimonial.] Patient, precise, and honest about what actually works.", name: "[CLIENT NAME]", detail: "1-1 client" }
+    ]
+  };
+
+  var DAYS = [["mon", "Mon", "Monday"], ["tue", "Tue", "Tuesday"], ["wed", "Wed", "Wednesday"], ["thu", "Thu", "Thursday"], ["fri", "Fri", "Friday"], ["sat", "Sat", "Saturday"], ["sun", "Sun", "Sunday"]];
+  function todayKey(data) { return (data && data.today) || DAYS[(new Date().getDay() + 6) % 7][0]; }
+  function gymById(data, id) { for (var i = 0; i < data.gyms.length; i++) if (data.gyms[i].id === id) return data.gyms[i]; return null; }
+  function d(data) { return data || SAMPLE; }
+
+  /* ---------------- sections (HTML strings) ---------------- */
+  function nav(data) {
+    var b = d(data).brand;
+    var links = [["#schedule", "Schedule"], ["#approach", "Approach"], ["#about", "About"], ["#contact", "Contact"]];
+    var li = links.map(function (l) { return '<li><a href="' + l[0] + '">' + l[1] + "</a></li>"; }).join("");
+    var cta = '<li><a class="pt-btn pt-btn--light pt-btn--sm" href="' + esc(b.bookUrl) + '">Book</a></li>';
+    return '<header class="pt-nav" data-pt="nav"><div class="pt-container"><div class="pt-nav__bar">' +
+      '<a class="pt-wordmark" href="#top">' + esc(b.name) + "</a>" +
+      '<ul class="pt-nav__links">' + li + cta + "</ul>" +
+      '<button class="pt-nav__toggle" type="button" aria-expanded="false" aria-label="Open menu">' + icon("menu") + "</button>" +
+      '</div></div><nav class="pt-nav__panel" aria-label="Mobile"><div class="pt-container"><ul>' + li + cta + "</ul></div></nav></header>";
+  }
+
+  function hero(data) {
+    var b = d(data).brand;
+    return '<section id="top" class="pt-hero pt-photo pt-ph">' +
+      '<div class="pt-container pt-reveal"><span class="pt-eyebrow">Personal training · ' + esc(b.city) + "</span>" +
+      '<h1 class="pt-h1">Back to basics.</h1>' +
+      '<p class="pt-em">Your body. Your goals. Your lifestyle.</p>' +
+      '<a class="pt-btn pt-btn--light" href="' + esc(b.bookUrl) + '">Start today</a></div>' +
+      '<span class="pt-ph__cap">Photo · Action shot, gym floor</span></section>';
+  }
+
+  function ticker(data) {
+    return '<div class="pt-ticker"><div class="pt-container pt-ticker__row">' + icon("pin", 14) +
+      '<span class="pt-label">Personal training across ' + esc(d(data).brand.city) + "</span></div></div>";
+  }
+
+  function slot(data, s, compact) {
+    var g = gymById(data, s.gym) || { name: s.gym, tone: "outline", bookUrl: "#" };
+    var cls = "pt-slot pt-slot--" + g.tone + (s.full ? " pt-slot--full" : "");
+    var type = (s.type === "1-1" ? "1-1" : "Group") + (s.full ? " · Fully booked" : "");
+    var inner = '<span class="pt-slot__time">' + esc(s.start) + "–" + esc(s.end) + "</span>" +
+      '<span class="pt-slot__gym">' + esc(g.name) + "</span>" +
+      '<span class="pt-slot__type pt-label-s">' + esc(type) + "</span>";
+    if (s.full) return '<div class="' + cls + '" aria-label="' + esc(s.start + " " + g.name + " " + type) + '">' + inner + "</div>";
+    return '<a class="' + cls + '" href="' + esc(g.bookUrl) + '" aria-label="Book ' + esc(s.type + " at " + g.name + ", " + s.start + "–" + s.end) + '">' + inner +
+      '<span class="pt-slot__go">' + icon("arrow", 14) + "</span></a>";
+  }
+
+  function scheduleInner(data, filter) {
+    var t = todayKey(data);
+    var visible = data.slots.filter(function (s) { return filter === "all" || s.gym === filter; });
+    var fGym = filter === "all" ? null : gymById(data, filter);
+    function forDay(k) { return visible.filter(function (s) { return s.day === k; }).sort(function (a, b) { return a.start < b.start ? -1 : 1; }); }
+    function offText(k) {
+      var anyAtAll = data.slots.some(function (s) { return s.day === k; });
+      return !anyAtAll || !fGym ? "Not training today." : "Not at " + fGym.name + " today.";
+    }
+
+    var tabs = '<div class="pt-tabs" role="group" aria-label="Filter by location">' +
+      [["all", "All"]].concat(data.gyms.map(function (g) { return [g.id, g.name]; })).map(function (o) {
+        return '<button type="button" class="pt-tab" data-filter="' + esc(o[0]) + '" aria-pressed="' + (o[0] === filter) + '">' + esc(o[1]) + "</button>";
+      }).join("") + "</div>";
+
+    var week = '<div class="pt-week">' + DAYS.map(function (day) {
+      var list = forDay(day[0]);
+      var isT = day[0] === t;
+      return '<div class="pt-day' + (isT ? " pt-day--today" : "") + '"><div class="pt-day__head"><span class="pt-label">' + day[1] + "</span>" +
+        (isT ? '<span class="pt-today pt-label-s">Today</span>' : "") + "</div>" +
+        (list.length ? list.map(function (s) { return slot(data, s); }).join("") : '<div class="pt-off">' + esc(offText(day[0])) + "</div>") + "</div>";
+    }).join("") + "</div>";
+
+    var daylist = '<div class="pt-daylist">' + DAYS.map(function (day) {
+      var list = forDay(day[0]);
+      var isT = day[0] === t;
+      var meta = list.length ? list.length + (list.length === 1 ? " session" : " sessions") : "Rest day";
+      return '<details class="pt-dayrow"' + (isT ? " open" : "") + "><summary>" +
+        '<span class="pt-label">' + day[2] + "</span>" +
+        '<span class="pt-dayrow__meta">' + (isT ? '<span class="pt-today pt-label-s">Today</span>' : "") + '<span class="pt-label-s">' + meta + "</span>" + icon("chevD", 16) + "</span></summary>" +
+        '<div class="pt-dayrow__body">' + (list.length ? list.map(function (s) { return slot(data, s); }).join("") : '<div class="pt-off">' + esc(offText(day[0])) + "</div>") + "</div></details>";
+    }).join("") + "</div>";
+
+    var legend = '<div class="pt-legend pt-label-s">' + data.gyms.map(function (g) {
+      return '<span class="pt-legend__item"><span class="pt-swatch pt-swatch--' + g.tone + '"></span>' + esc(g.name) + "</span>";
+    }).join("") + '<span class="pt-legend__item"><span class="pt-swatch pt-swatch--full"></span>Fully booked</span></div>';
+
+    var gyms = data.gyms.filter(function (g) { return filter === "all" || g.id === filter; });
+    var variants = ["", "b", "c"];
+    var locs = '<div class="pt-locs">' + gyms.map(function (g) { return locationCard(g, variants[data.gyms.indexOf(g) % 3]); }).join("") + "</div>";
+
+    return { tabs: tabs, body: week + daylist + legend + locs };
+  }
+
+  function locationCard(g, variant) {
+    return '<article class="pt-loc">' + ph(variant, g.name + " exterior") +
+      '<div class="pt-loc__body"><span class="pt-loc__hood pt-label-s"><span class="pt-swatch pt-swatch--' + esc(g.tone) + '"></span>' + esc(g.neighborhood) + "</span>" +
+      '<h3 class="pt-h3">' + esc(g.name) + "</h3>" +
+      '<p class="pt-text-s pt-muted">' + esc(g.address) + "</p>" +
+      '<div class="pt-loc__actions"><a class="pt-link" href="' + esc(g.directionsUrl) + '">Get directions ' + icon("arrow", 12, 2) + "</a>" +
+      '<a class="pt-btn pt-btn--dark pt-btn--sm" href="' + esc(g.bookUrl) + '">Book here</a></div></div></article>';
+  }
+
+  function scheduleShell() {
+    return '<section id="schedule" class="pt-section pt-bg-paper" data-pt="schedule"><div class="pt-container">' +
+      '<div class="pt-sched__top pt-reveal"><div class="pt-head"><span class="pt-eyebrow">Schedule</span><h2 class="pt-h2">Where to find me.</h2>' +
+      '<p class="pt-em">Book a session at the location closest to you.</p></div><div data-pt-tabs></div></div>' +
+      '<div class="pt-reveal" data-pt-body></div></div></section>';
+  }
+
+  function statement(data) {
+    return '<section id="approach" class="pt-section pt-bg-off"><div class="pt-container pt-statement__grid">' +
+      '<h2 class="pt-h1 pt-reveal">Strong is built, not bought.</h2>' +
+      '<div class="pt-statement__body pt-reveal"><p class="pt-lead">No gimmicks. No twelve-week miracles. Just the fundamentals — squat, hinge, push, pull, carry — coached properly and progressed patiently.</p>' +
+      "<p>I train people one-to-one and in groups of up to six, so every rep gets seen and every plan fits the life you actually have.</p>" +
+      '<p class="pt-em">Show up. Do the work. Go home stronger.</p>' +
+      '<a class="pt-btn pt-btn--dark" href="' + esc(d(data).brand.bookUrl) + '">Book a free consult</a></div></div></section>';
+  }
+
+  function band(data) {
+    return '<section class="pt-band pt-photo pt-ph pt-ph--b"><div class="pt-container pt-band__row pt-reveal">' +
+      '<div><h2>Small groups. Full attention.</h2><p class="pt-em">Six people, one coach, no one hiding at the back.</p></div>' +
+      '<a class="pt-btn pt-btn--light" href="#schedule">See group sessions</a></div>' +
+      '<span class="pt-ph__cap">Photo · Small group session</span></section>';
+  }
+
+  function contact(data) {
+    var b = d(data).brand;
+    var cards = [
+      ["phone", "Text or call.", "Quickest way to reach me. " + b.phone, "Call now", "tel:"],
+      ["chat", "WhatsApp.", "Message any time, I reply between sessions.", "Message", "#"],
+      ["mail", "Email.", "For longer questions or corporate groups.", "Write", "mailto:" + b.email],
+      ["camera", "Instagram.", "Training clips and form tips. " + b.instagram, "Follow", "#"]
+    ];
+    return '<section id="contact" class="pt-section pt-bg-off"><div class="pt-container">' +
+      '<div class="pt-head pt-reveal"><span class="pt-eyebrow">Contact</span><h2 class="pt-h2">Let’s talk.</h2><p class="pt-em">Tell me where you are. I’ll tell you where to start.</p></div>' +
+      '<div class="pt-contact__grid pt-reveal">' + cards.map(function (c) {
+        return '<article class="pt-card">' + icon(c[0], 28) + '<h3 class="pt-h3" style="font-size:20px">' + esc(c[1]) + '</h3><p class="pt-text-s">' + esc(c[2]) + "</p>" +
+          '<a class="pt-btn pt-btn--dark pt-btn--sm" href="' + esc(c[4]) + '">' + esc(c[3]) + "</a></article>";
+      }).join("") + "</div></div></section>";
+  }
+
+  function testimonial(data) {
+    var t = d(data).testimonials[0];
+    return '<section class="pt-quote pt-photo pt-photo--strong pt-ph pt-ph--c" data-pt="carousel" aria-roledescription="carousel" aria-label="Client testimonials"><div class="pt-container">' +
+      '<div class="pt-quote__stage pt-reveal">' +
+      '<span class="pt-eyebrow" style="margin:0">Clients</span>' +
+      '<blockquote aria-live="polite">“' + esc(t.quote) + '”</blockquote><cite class="pt-label">' + esc(t.name) + " — " + esc(t.detail) + "</cite>" +
+      '<span class="pt-quote__count pt-label-s">01 / 0' + d(data).testimonials.length + "</span>" +
+      '<button class="pt-quote__arrow pt-quote__arrow--prev" type="button" aria-label="Previous testimonial">' + icon("chevL", 32, 1) + "</button>" +
+      '<button class="pt-quote__arrow pt-quote__arrow--next" type="button" aria-label="Next testimonial">' + icon("chevR", 32, 1) + "</button>" +
+      '</div></div><span class="pt-ph__cap">Photo · Dark, low-key portrait</span></section>';
+  }
+
+  function about(data) {
+    var b = d(data).brand;
+    var shots = [["", "Coaching a squat"], ["b", "Kettlebell detail"], ["c", "Group warm-up"], ["b", "Chalk and bar"]];
+    return '<section id="about" class="pt-about pt-photo pt-photo--strong pt-ph pt-ph--b"><div class="pt-container pt-about__grid">' +
+      '<div class="pt-reveal"><span class="pt-eyebrow">About</span><h2 class="pt-h1" style="font-size:72px">Hi, I’m ' + esc(b.name) + ".</h2></div>" +
+      '<div class="pt-about__bio pt-reveal">' +
+      '<p class="pt-em">I don’t sell transformations. I teach people to train.</p>' +
+      "<p>I’ve coached in " + esc(b.city) + " for [X] years, across commercial floors, strength gyms and the odd car park at 6am. Before that I was the person at the back of the class, unsure what I was doing and too stubborn to ask.</p>" +
+      "<p>That’s the person I build sessions for. We start with how you move today, not how someone on the internet moves. We pick a few things that matter, we do them well, and we add weight when you’ve earned it. Nothing clever. Nothing you can’t keep doing in ten years.</p>" +
+      "<p>Most of my clients are busy: parents, shift workers, people who’ve tried everything once. They don’t need more motivation. They need a plan, a time and a place. That’s why I train at three gyms across the city — so the closest one is never far.</p>" +
+      "<p>[Qualifications and certifications.]</p></div></div>" +
+      '<span class="pt-ph__cap">Photo · Coach portrait</span></section>' +
+      '<div class="pt-gallery pt-dark"><div class="pt-gallery__grid">' + shots.map(function (s) { return ph(s[0], s[1], "pt-reveal"); }).join("") + "</div></div>";
+  }
+
+  function footer(data) {
+    var b = d(data).brand;
+    return '<footer class="pt-footer pt-dark"><div class="pt-container pt-footer__row">' +
+      '<a class="pt-wordmark" href="#top">' + esc(b.name) + "</a>" +
+      '<div class="pt-footer__links pt-label"><a href="#schedule">Schedule</a><a href="#about">About</a><a href="#contact">Contact</a></div>' +
+      '<p class="pt-text-s">© ' + new Date().getFullYear() + " " + esc(b.name) + " · Personal training in " + esc(b.city) + "</p></div></footer>";
+  }
+
+  /* ---------------- behaviour ---------------- */
+  function mountSchedule(root, data) {
+    data = d(data);
+    var host = root.querySelector('[data-pt="schedule"]') || root;
+    var filter = "all";
+    function render() {
+      var r = scheduleInner(data, filter);
+      host.querySelector("[data-pt-tabs]").innerHTML = r.tabs;
+      host.querySelector("[data-pt-body]").innerHTML = r.body;
+    }
+    host.addEventListener("click", function (e) {
+      var b = e.target.closest && e.target.closest("[data-filter]");
+      if (!b) return;
+      filter = b.getAttribute("data-filter");
+      render();
+    });
+    render();
+  }
+
+  function mountNav(root) {
+    var n = root.querySelector('[data-pt="nav"]');
+    if (!n) return;
+    var t = n.querySelector(".pt-nav__toggle");
+    t.addEventListener("click", function () {
+      var open = !n.classList.contains("is-open");
+      n.classList.toggle("is-open", open);
+      t.setAttribute("aria-expanded", String(open));
+      t.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      t.innerHTML = icon(open ? "close" : "menu");
+    });
+    n.querySelectorAll(".pt-nav__panel a").forEach(function (a) { a.addEventListener("click", function () { if (n.classList.contains("is-open")) t.click(); }); });
+  }
+
+  function mountCarousel(root, data) {
+    var c = root.querySelector('[data-pt="carousel"]');
+    if (!c) return;
+    var list = d(data).testimonials, i = 0;
+    var q = c.querySelector("blockquote"), ci = c.querySelector("cite"), n = c.querySelector(".pt-quote__count");
+    function go(step) {
+      i = (i + step + list.length) % list.length;
+      c.classList.add("is-fading");
+      setTimeout(function () {
+        q.textContent = "“" + list[i].quote + "”";
+        ci.textContent = list[i].name + " — " + list[i].detail;
+        n.textContent = "0" + (i + 1) + " / 0" + list.length;
+        c.classList.remove("is-fading");
+      }, 300);
+    }
+    c.querySelector(".pt-quote__arrow--prev").addEventListener("click", function () { go(-1); });
+    c.querySelector(".pt-quote__arrow--next").addEventListener("click", function () { go(1); });
+  }
+
+  function reveal(root) {
+    var els = root.querySelectorAll(".pt-reveal");
+    if (!("IntersectionObserver" in window)) return;
+    root.classList.add("pt-js");
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("is-in"); io.unobserve(en.target); } });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+    els.forEach(function (el) { io.observe(el); });
+    // safety: never leave content hidden (e.g. in a static capture)
+    setTimeout(function () { els.forEach(function (el) { el.classList.add("is-in"); }); }, 2500);
+  }
+
+  var PARTS = {
+    nav: nav, hero: hero, ticker: ticker, schedule: scheduleShell, statement: statement, band: band,
+    contact: contact, testimonial: testimonial, about: about, footer: footer
+  };
+  var ORDER = ["nav", "hero", "ticker", "schedule", "statement", "band", "contact", "testimonial", "about", "footer"];
+
+  /* mount(el, parts, data): parts = "home" | a part name | array of part names */
+  function mount(el, parts, data) {
+    data = d(data);
+    var list = parts === "home" || !parts ? ORDER : [].concat(parts);
+    el.classList.add("pt");
+    el.innerHTML = list.map(function (p) { return PARTS[p](data); }).join("");
+    if (list.indexOf("schedule") > -1) mountSchedule(el, data);
+    mountNav(el);
+    mountCarousel(el, data);
+    reveal(el);
+    return el;
+  }
+
+  window.Trainer = {
+    sample: SAMPLE, days: DAYS, icon: icon, mount: mount,
+    html: { slot: function (s, data) { return slot(d(data), s); }, locationCard: locationCard, placeholder: ph },
+    parts: ORDER.slice()
+  };
+})();
+</script>
+<script>Trainer.mount(document.getElementById('root'), 'home');</script>
+</body></html>

@@ -1,0 +1,212 @@
+@import "tailwindcss";
+
+/* Mirrors design-system/tokens.json. Defaults are cleared so off-system values don't exist. */
+@theme {
+  --color-*: initial;
+  --color-ink: #000000;
+  --color-charcoal: #1c1c1c;
+  --color-graphite: #262626;
+  --color-body: #333333;
+  --color-muted: #5c5c5c;
+  --color-paper: #ffffff;
+  --color-off-white: #fcfcfc;
+  --color-mist: #ededed;
+  --color-hairline: #dcdcdc;
+  --color-on-dark: #ffffff;
+  --color-on-dark-muted: #bdbdbd;
+  --color-overlay: rgba(0, 0, 0, 0.45);
+  --color-overlay-strong: rgba(0, 0, 0, 0.55);
+  --color-signal: #2f6b4f;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  --spacing: 8px;
+
+  --radius-*: initial;
+
+  --breakpoint-*: initial;
+  --breakpoint-sm: 761px;
+  --breakpoint-md: 901px;
+  --breakpoint-lg: 1101px;
+  --breakpoint-xl: 1440px;
+
+  --text-*: initial;
+  --text-display-xl: 96px;
+  --text-display-xl--line-height: 0.9;
+  /* README: H1 steps down to 72px at <=1100px; also the band and About headings. */
+  --text-display-l: 72px;
+  --text-display-l--line-height: 0.9;
+  --text-display-m: 52px;
+  --text-display-m--line-height: 0.92;
+  --text-h2: 48px;
+  --text-h2--line-height: 0.95;
+  --text-h2-mobile: 36px;
+  --text-h2-mobile--line-height: 0.95;
+  --text-h3: 24px;
+  --text-h3--line-height: 1.05;
+  --text-wordmark: 15px;
+  --text-wordmark--line-height: 1;
+  --text-lead: 18px;
+  --text-lead--line-height: 1.6;
+  --text-emphasis: 18px;
+  --text-emphasis--line-height: 1.5;
+  /* tokens.json `text`; named base because text-body is already the body color. */
+  --text-base: 16px;
+  --text-base--line-height: 1.65;
+  --text-body-s: 14px;
+  --text-body-s--line-height: 1.6;
+  --text-quote: 32px;
+  --text-quote--line-height: 1.35;
+  /* tokens.json: quote is 22px on mobile. */
+  --text-quote-mobile: 22px;
+  --text-quote-mobile--line-height: 1.35;
+  --text-label: 11px;
+  --text-label--line-height: 1.4;
+  --text-label-s: 10px;
+  --text-label-s--line-height: 1.4;
+
+  --tracking-*: initial;
+  --tracking-tight: -0.02em;
+  --tracking-snug: -0.01em;
+  --tracking-label: 0.12em;
+  --tracking-wordmark: 0.16em;
+
+  --ease-reveal: cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+
+@theme inline {
+  --font-*: initial;
+  --font-display: var(--font-archivo), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-body: var(--font-open-sans), Ubuntu, "Helvetica Neue", Arial, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-padding-top: calc(var(--spacing) * 8);
+  }
+
+  body {
+    @apply bg-paper font-body text-base text-body antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display font-extrabold tracking-tight text-ink;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--focus-ring, var(--color-ink));
+    outline-offset: 3px;
+  }
+}
+
+@utility label {
+  @apply font-body text-label font-bold tracking-label uppercase;
+}
+
+@utility label-s {
+  @apply font-body text-label-s font-bold tracking-label uppercase;
+}
+
+@utility display-heading {
+  @apply font-display font-extrabold tracking-tight;
+}
+
+@utility wordmark {
+  @apply font-display text-wordmark font-extrabold tracking-wordmark uppercase;
+}
+
+@utility shell {
+  @apply mx-auto w-full max-w-164 px-3 sm:px-8;
+}
+
+/* Dark and photo grounds: paper focus ring and on-dark text. */
+@utility surface-dark {
+  --focus-ring: var(--color-paper);
+  @apply text-on-dark-muted;
+}
+
+@utility photo-overlay {
+  position: relative;
+  isolation: isolate;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: var(--color-overlay);
+  }
+
+  & > * {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+@utility photo-overlay-strong {
+  &::before {
+    background: var(--color-overlay-strong);
+  }
+}
+
+/* The 50% gray reads on ink, paper and mist alike, which no single token does. */
+@utility slot-hatch {
+  background-image: repeating-linear-gradient(
+    135deg,
+    transparent 0 7px,
+    rgb(128 128 128 / 0.35) 7px 8px
+  );
+}
+
+/* Stand-ins for photography until real images exist; the grays imitate a B&W photo. */
+@utility ph {
+  background-color: #2e2e2e;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    radial-gradient(120% 90% at 70% 30%, #6a6a6a 0%, #3a3a3a 45%, #161616 100%);
+  background-size:
+    160px 160px,
+    cover;
+}
+
+@utility ph-b {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    linear-gradient(160deg, #1a1a1a 0%, #4d4d4d 50%, #202020 100%);
+}
+
+@utility ph-c {
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    radial-gradient(90% 120% at 20% 80%, #5e5e5e 0%, #2c2c2c 55%, #111 100%);
+}
+
+/* Hidden only once JS has flagged <html>, so content never stays invisible without it. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(calc(var(--spacing) * 2));
+  transition:
+    opacity 700ms var(--ease-reveal),
+    transform 700ms var(--ease-reveal);
+}
+
+.js [data-reveal="in"] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+  }
+}

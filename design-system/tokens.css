@@ -1,0 +1,30 @@
+/* [NAME] Training — generated from tokens.json */
+:root {
+  --ink: #000000;
+  --charcoal: #1c1c1c;
+  --graphite: #262626;
+  --body: #333333;
+  --muted: #5c5c5c;
+  --paper: #ffffff;
+  --off-white: #fcfcfc;
+  --mist: #ededed;
+  --hairline: #dcdcdc;
+  --on-dark: #ffffff;
+  --on-dark-muted: #bdbdbd;
+  --overlay: rgba(0, 0, 0, 0.45);
+  --overlay-strong: rgba(0, 0, 0, 0.55);
+  --signal: #2f6b4f;
+  --space-half: 4px;
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-6: 48px;
+  --space-8: 64px;
+  --space-12: 96px;
+  --space-16: 128px;
+  --radius-none: 0px;
+  --radius-dot: 50%;
+  --font-display: Archivo, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-body: "Open Sans", Ubuntu, "Helvetica Neue", Arial, sans-serif;
+}
