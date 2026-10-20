@@ -156,6 +156,14 @@
   );
 }
 
+@utility swatch-hatch {
+  background-image: repeating-linear-gradient(
+    135deg,
+    transparent 0 3px,
+    var(--color-muted) 3px 4px
+  );
+}
+
 /* Stand-ins for photography until real images exist; the grays imitate a B&W photo. */
 @utility ph {
   background-color: #2e2e2e;

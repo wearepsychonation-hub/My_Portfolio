@@ -5,9 +5,13 @@ import { PhotoPlaceholder } from "@/components/atoms/PhotoPlaceholder";
 import { SignalDot } from "@/components/atoms/SignalDot";
 import { Button } from "@/components/molecules/Button";
 import { TextLink } from "@/components/molecules/TextLink";
+import { Swatch } from "@/components/molecules/Swatch";
 import { ContactCard } from "@/components/organisms/ContactCard";
+import { LocationCard } from "@/components/organisms/LocationCard";
+import { OffDay, Slot } from "@/components/organisms/Slot";
 import { seed } from "@/content/seed";
 import { cn } from "@/lib/cn";
+import type { Slot as SlotData } from "@/types/schedule";
 
 export const metadata: Metadata = {
   title: "Design system",
@@ -34,6 +38,9 @@ const typeClasses: Record<string, string> = {
 type TypeStyle = { name: string; fontSize: string; lineHeight: number; fontWeight: number; sample: string; usage: string };
 
 const darkSwatches = new Set(["ink", "charcoal", "graphite", "body", "muted", "signal"]);
+
+const { gyms } = seed;
+const sample: SlotData = { day: "mon", start: "06:00", end: "07:00", gym: "a", type: "1-1" };
 
 export default function DesignSystemPage() {
   const typeStyles: TypeStyle[] = tokens.type.groups.flatMap((g): TypeStyle[] => g.styles);
@@ -149,7 +156,50 @@ export default function DesignSystemPage() {
         </div>
       </Section>
 
-      <Section title="Icons and signal." tone="off">
+      <Section title="Schedule." tone="off">
+        <p className="mb-6 max-w-80 text-muted">
+          Gyms are told apart by tone, never by color. Bookable slots are links; Fully booked is
+          hatched with the time struck through.
+        </p>
+        <h3 className="label mb-2 text-ink">Week grid</h3>
+        <div className="grid grid-cols-2 gap-1 sm:grid-cols-5">
+          {gyms.map((g) => (
+            <Slot key={g.id} gym={g} slot={{ ...sample, gym: g.id }} />
+          ))}
+          <Slot gym={gyms[0]!} slot={{ ...sample, full: true }} />
+          <OffDay text="Not training today." />
+        </div>
+        <h3 className="label mt-6 mb-2 text-ink">Mobile day list</h3>
+        <div className="grid max-w-80 gap-1">
+          {gyms.map((g) => (
+            <Slot key={g.id} gym={g} slot={{ ...sample, gym: g.id }} layout="row" />
+          ))}
+          <Slot gym={gyms[2]!} slot={{ ...sample, full: true }} layout="row" />
+          <OffDay text="Not at [GYM B] today." layout="row" />
+        </div>
+        <div className="label-s mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-muted">
+          {gyms.map((g) => (
+            <span key={g.id} className="inline-flex items-center gap-1">
+              <Swatch tone={g.tone} />
+              {g.name} · {g.tone}
+            </span>
+          ))}
+          <span className="inline-flex items-center gap-1">
+            <Swatch tone="full" />
+            Fully booked
+          </span>
+          <span className="inline-flex items-center gap-0.75 text-ink">
+            <SignalDot />
+            Today
+          </span>
+        </div>
+        <h3 className="label mt-6 mb-2 text-ink">Location card</h3>
+        <div className="max-w-50">
+          <LocationCard gym={gyms[0]!} />
+        </div>
+      </Section>
+
+      <Section title="Icons and signal.">
         <div className="flex flex-wrap gap-3">
           {iconNames.map((name) => (
             <figure key={name} className="grid w-12 justify-items-center gap-1 border border-hairline py-2 text-ink">
@@ -164,7 +214,7 @@ export default function DesignSystemPage() {
         </p>
       </Section>
 
-      <Section title="Photography.">
+      <Section title="Photography." tone="off">
         <p className="mb-6 max-w-80 text-muted">
           Placeholders until real black and white training photos exist. Photos sit under overlay
           (45%), or overlay-strong (55%) behind long text.

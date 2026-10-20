@@ -12,7 +12,7 @@ import { Ticker } from "@/components/sections/Ticker";
 import { getSiteContent } from "@/lib/content";
 
 export default async function HomePage() {
-  const { brand, nav, home, testimonials } = await getSiteContent();
+  const { brand, nav, home, gyms, slots, today, testimonials } = await getSiteContent();
   const footerLinks = nav.filter((l) => l.href !== "#approach");
 
   return (
@@ -21,7 +21,7 @@ export default async function HomePage() {
       <main>
         <Hero {...home.hero} bookUrl={brand.bookUrl} />
         <Ticker text={home.ticker} />
-        <Schedule {...home.schedule} />
+        <Schedule {...home.schedule} gyms={gyms} slots={slots} today={today} />
         <Statement {...home.statement} bookUrl={brand.bookUrl} />
         <PhotoBand {...home.band} />
         <ContactRow {...home.contact} />
