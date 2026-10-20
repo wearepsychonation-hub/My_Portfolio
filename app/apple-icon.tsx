@@ -1,10 +1,15 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
 export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
 
-// Same mark as app/icon.svg; iOS needs a PNG. Hex values are the ink and paper tokens.
-export default function AppleIcon() {
+// iOS needs an opaque square, so the favicon artwork sits on paper (#ffffff).
+export default async function AppleIcon() {
+  const icon = await readFile(join(process.cwd(), "app/icon.png"));
+  const src = `data:image/png;base64,${icon.toString("base64")}`;
+
   return new ImageResponse(
     <div
       style={{
@@ -13,21 +18,10 @@ export default function AppleIcon() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "#000000",
+        background: "#ffffff",
       }}
     >
-      <svg
-        width="112"
-        height="112"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="#ffffff"
-        strokeWidth="1.5"
-        strokeLinecap="square"
-      >
-        <path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z" />
-        <circle cx="12" cy="9.5" r="2.5" />
-      </svg>
+      <img src={src} width={128} height={128} alt="" />
     </div>,
     size,
   );
