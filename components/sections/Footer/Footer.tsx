@@ -14,7 +14,7 @@ export function Footer({ name, city, links }: FooterProps) {
             <SmartLink
               key={l.key}
               href={l.href}
-              className="text-on-dark-muted transition-colors duration-200 hover:text-on-dark"
+              className="-my-1 py-1 text-on-dark-muted transition-colors duration-200 hover:text-on-dark"
             >
               {l.label}
             </SmartLink>

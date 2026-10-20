@@ -19,7 +19,9 @@ export function Hero({
       image={image}
       imageAlt={imageAlt}
       preload
-      className="flex min-h-80 items-end pt-12 pb-8 sm:min-h-95 sm:pt-16 sm:pb-12"
+      // Capped at the viewport below the 64px nav so the headline and CTA stay above the fold
+      // on short laptops and landscape phones.
+      className="flex min-h-[min(640px,100svh_-_64px)] items-end pt-12 pb-8 sm:min-h-[min(760px,100svh_-_64px)] sm:pt-16 sm:pb-12"
     >
       {/* No reveal: the headline is the LCP element and must paint immediately. */}
       <div className="shell">

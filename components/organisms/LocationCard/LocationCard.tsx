@@ -9,13 +9,14 @@ type LocationCardProps = { gym: Gym; placeholder?: PlaceholderVariant };
 
 export function LocationCard({ gym, placeholder = "a" }: LocationCardProps) {
   return (
-    <article className="flex flex-col border border-hairline bg-paper transition-colors duration-200 hover:border-ink">
+    // Side by side on tablet, where the cards stack in one column and a full-width photo runs tall.
+    <article className="flex flex-col border border-hairline bg-paper transition-colors duration-200 hover:border-ink sm:max-md:flex-row">
       <Photo
         image={gym.image}
         imageAlt={`${gym.name} exterior`}
-        sizes="(min-width: 901px) 33vw, 100vw"
+        sizes="(min-width: 901px) 33vw, (min-width: 761px) 50vw, 100vw"
         placeholder={placeholder}
-        className="aspect-[16/10]"
+        className="aspect-[16/10] sm:max-md:w-1/2 sm:max-md:flex-none"
       />
       <div className="flex flex-1 flex-col gap-1 p-3">
         <span className="inline-flex items-center gap-1 label-s text-muted">

@@ -76,7 +76,7 @@ export function ScheduleBoard({
               aria-pressed={filter === t.id}
               onClick={() => setFilter(t.id)}
               className={cn(
-                "flex-none border border-ink bg-paper px-2.5 py-1.25 label text-ink transition-colors duration-200 hover:bg-mist",
+                "flex-none border border-ink bg-paper px-2 py-1.25 sm:px-2.5 label text-ink transition-colors duration-200 hover:bg-mist",
                 "aria-pressed:bg-ink aria-pressed:text-paper",
                 i > 0 && "-ml-px",
               )}
