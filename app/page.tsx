@@ -70,7 +70,7 @@ export default async function HomePage() {
         <Schedule {...home.schedule} gyms={gyms} slots={slots} today={today} />
         <Statement {...home.statement} bookUrl={brand.bookUrl} />
         <PhotoBand {...home.band} />
-        <ContactRow {...home.contact} />
+        <ContactRow {...home.contact} brand={brand} />
         <Testimonials {...home.testimonials} items={testimonials} />
         <About {...home.about} />
         <Gallery items={home.gallery} />

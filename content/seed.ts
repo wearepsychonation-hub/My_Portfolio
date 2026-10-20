@@ -12,8 +12,6 @@ const brand: Brand = {
   bookUrl: "#contact",
 };
 
-const digits = (s: string) => s.replace(/[^\d+]/g, "");
-
 /** Plain paragraphs as Portable Text, the shape Sanity returns for the About bio. */
 const toBlocks = (paragraphs: string[]) =>
   paragraphs.map((text, i) => ({
@@ -72,32 +70,32 @@ export const seed: SiteContent = {
       emphasis: "Tell me where you are. I’ll tell you where to start.",
       cards: [
         {
-          icon: "phone",
+          key: "card-phone",
+          channel: "phone",
           title: "Text or call.",
-          text: `Quickest way to reach me. ${brand.phone}`,
+          text: "Quickest way to reach me.",
           ctaLabel: "Call now",
-          href: `tel:${digits(brand.phone)}`,
         },
         {
-          icon: "chat",
+          key: "card-whatsapp",
+          channel: "whatsapp",
           title: "WhatsApp.",
           text: "Message any time, I reply between sessions.",
           ctaLabel: "Message",
-          href: `https://wa.me/${digits(brand.whatsapp)}`,
         },
         {
-          icon: "mail",
+          key: "card-email",
+          channel: "email",
           title: "Email.",
           text: "For longer questions or corporate groups.",
           ctaLabel: "Write",
-          href: `mailto:${brand.email}`,
         },
         {
-          icon: "camera",
+          key: "card-instagram",
+          channel: "instagram",
           title: "Instagram.",
-          text: `Training clips and form tips. ${brand.instagram}`,
+          text: "Training clips and form tips.",
           ctaLabel: "Follow",
-          href: `https://instagram.com/${brand.instagram.replace(/^@/, "")}`,
         },
       ],
     },

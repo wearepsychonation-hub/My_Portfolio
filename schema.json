@@ -12,7 +12,7 @@
             "value": "contactCard"
           }
         },
-        "icon": {
+        "channel": {
           "type": "objectAttribute",
           "value": {
             "type": "union",
@@ -23,19 +23,15 @@
               },
               {
                 "type": "string",
-                "value": "chat"
+                "value": "whatsapp"
               },
               {
                 "type": "string",
-                "value": "mail"
+                "value": "email"
               },
               {
                 "type": "string",
-                "value": "camera"
-              },
-              {
-                "type": "string",
-                "value": "pin"
+                "value": "instagram"
               }
             ]
           },
@@ -56,13 +52,6 @@
           "optional": false
         },
         "ctaLabel": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": false
-        },
-        "href": {
           "type": "objectAttribute",
           "value": {
             "type": "string"

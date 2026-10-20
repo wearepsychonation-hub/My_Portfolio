@@ -17,11 +17,10 @@ export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: schema.json
 export type ContactCard = {
   _type: "contactCard";
-  icon: "phone" | "chat" | "mail" | "camera" | "pin";
+  channel: "phone" | "whatsapp" | "email" | "instagram";
   title: string;
   text: string;
   ctaLabel: string;
-  href: string;
 };
 
 export type NavLink = {
@@ -358,7 +357,7 @@ export type AllSanitySchemaTypes =
 
 // Source: sanity/lib/queries.ts
 // Variable: SITE_CONTENT_QUERY
-// Query: {  "settings": *[_type == "siteSettings" && _id == "siteSettings"][0]{    name, city, phone, whatsapp, email, instagram, bookUrl,    nav[]{ _key, label, href },    seo{ title, description, ogImage{ "asset": asset->{ _id, "lqip": metadata.lqip }, alt, hotspot, crop } }  },  "home": *[_type == "homePage" && _id == "homePage"][0]{    hero{ eyebrow, headline, emphasis, ctaLabel, image{ "asset": asset->{ _id, "lqip": metadata.lqip }, alt, hotspot, crop } },    ticker,    schedule{ eyebrow, headline, emphasis },    statement{ headline, lead, paragraphs, emphasis, ctaLabel },    band{ headline, emphasis, ctaLabel, ctaHref, image{ "asset": asset->{ _id, "lqip": metadata.lqip }, alt, hotspot, crop } },    contact{ eyebrow, headline, emphasis, cards[]{ _key, icon, title, text, ctaLabel, href } },    testimonials{ eyebrow, image{ "asset": asset->{ _id, "lqip": metadata.lqip }, alt, hotspot, crop }, "items": items[]->{ _id, quote, name, detail } },    about{ eyebrow, headline, emphasis, bio, image{ "asset": asset->{ _id, "lqip": metadata.lqip }, alt, hotspot, crop } },    gallery[]{ "asset": asset->{ _id, "lqip": metadata.lqip }, alt, hotspot, crop }  },  "gyms": *[_type == "gym"] | order(order asc, name asc){    _id, name, neighborhood, address, tone, directionsUrl, bookUrl, image{ "asset": asset->{ _id, "lqip": metadata.lqip }, alt, hotspot, crop }  },  "slots": *[_type == "session" && defined(gym)] | order(start asc){    _id, day, start, end, "gym": gym._ref, type, fullyBooked  }}
+// Query: {  "settings": *[_type == "siteSettings" && _id == "siteSettings"][0]{    name, city, phone, whatsapp, email, instagram, bookUrl,    nav[]{ _key, label, href },    seo{ title, description, ogImage{ "asset": asset->{ _id, "lqip": metadata.lqip }, alt, hotspot, crop } }  },  "home": *[_type == "homePage" && _id == "homePage"][0]{    hero{ eyebrow, headline, emphasis, ctaLabel, image{ "asset": asset->{ _id, "lqip": metadata.lqip }, alt, hotspot, crop } },    ticker,    schedule{ eyebrow, headline, emphasis },    statement{ headline, lead, paragraphs, emphasis, ctaLabel },    band{ headline, emphasis, ctaLabel, ctaHref, image{ "asset": asset->{ _id, "lqip": metadata.lqip }, alt, hotspot, crop } },    contact{ eyebrow, headline, emphasis, cards[]{ _key, channel, title, text, ctaLabel } },    testimonials{ eyebrow, image{ "asset": asset->{ _id, "lqip": metadata.lqip }, alt, hotspot, crop }, "items": items[]->{ _id, quote, name, detail } },    about{ eyebrow, headline, emphasis, bio, image{ "asset": asset->{ _id, "lqip": metadata.lqip }, alt, hotspot, crop } },    gallery[]{ "asset": asset->{ _id, "lqip": metadata.lqip }, alt, hotspot, crop }  },  "gyms": *[_type == "gym"] | order(order asc, name asc){    _id, name, neighborhood, address, tone, directionsUrl, bookUrl, image{ "asset": asset->{ _id, "lqip": metadata.lqip }, alt, hotspot, crop }  },  "slots": *[_type == "session" && defined(gym)] | order(start asc){    _id, day, start, end, "gym": gym._ref, type, fullyBooked  }}
 export type SITE_CONTENT_QUERY_RESULT = {
   settings: {
     name: string;
@@ -437,11 +436,10 @@ export type SITE_CONTENT_QUERY_RESULT = {
       emphasis: string;
       cards: Array<{
         _key: string;
-        icon: "camera" | "chat" | "mail" | "phone" | "pin";
+        channel: "email" | "instagram" | "phone" | "whatsapp";
         title: string;
         text: string;
         ctaLabel: string;
-        href: string;
       }>;
     };
     testimonials: {

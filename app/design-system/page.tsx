@@ -150,8 +150,8 @@ export default function DesignSystemPage() {
           Hairline border on paper; the border turns ink on hover.
         </p>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {seed.home.contact.cards.map((c) => (
-            <ContactCard key={c.title} {...c} />
+          {seed.home.contact.cards.map(({ key, ...c }) => (
+            <ContactCard key={key} {...c} brand={seed.brand} />
           ))}
         </div>
       </Section>

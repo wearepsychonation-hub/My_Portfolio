@@ -39,7 +39,7 @@ const docs = [
     band: strip(home.band),
     contact: {
       ...home.contact,
-      cards: home.contact.cards.map((c, i) => ({ _type: "contactCard", _key: `card${i}`, ...c })),
+      cards: home.contact.cards.map(({ key, ...c }) => ({ _type: "contactCard", _key: key, ...c })),
     },
     testimonials: {
       eyebrow: home.testimonials.eyebrow,

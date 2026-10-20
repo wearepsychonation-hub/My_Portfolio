@@ -94,7 +94,17 @@ export const homePage = defineType({
         name: "cards",
         type: "array",
         of: [defineArrayMember({ type: "contactCard" })],
-        validation: (rule) => rule.required().min(1).max(4),
+        validation: (rule) =>
+          rule
+            .required()
+            .min(1)
+            .max(4)
+            .custom((cards: { channel?: string }[] | undefined) => {
+              const channels = (cards ?? []).map((c) => c.channel).filter(Boolean);
+              return (
+                new Set(channels).size === channels.length || "Each channel can only have one card."
+              );
+            }),
       }),
     ]),
     section("testimonials", "Testimonials", [

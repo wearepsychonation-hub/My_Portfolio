@@ -1,5 +1,4 @@
 import type { PortableTextBlock } from "sanity";
-import type { IconName } from "@/components/atoms/Icon";
 import type { ScheduleData } from "./schedule";
 
 /** A Sanity image as queried; components fall back to a placeholder when it's absent. */
@@ -15,12 +14,15 @@ export interface NavLink {
   label: string;
 }
 
+export type ContactChannel = "phone" | "whatsapp" | "email" | "instagram";
+
 export interface ContactCard {
-  icon: IconName;
+  key: string;
+  channel: ContactChannel;
   title: string;
+  /** The number, address or handle from the brand is appended. */
   text: string;
   ctaLabel: string;
-  href: string;
 }
 
 /** `imageAlt` describes the intended photo: the alt text fallback and the placeholder caption. */

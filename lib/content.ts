@@ -64,7 +64,10 @@ function toSiteContent(settings: Settings, home: Home, { gyms, slots }: Result):
       schedule: home.schedule,
       statement: { ...home.statement, paragraphs: home.statement.paragraphs ?? [] },
       band: { ...home.band, image: toImage(home.band.image), imageAlt: fallback.band.imageAlt },
-      contact: home.contact,
+      contact: {
+        ...home.contact,
+        cards: home.contact.cards.map(({ _key, ...c }) => ({ key: _key, ...c })),
+      },
       testimonials: {
         eyebrow: home.testimonials.eyebrow,
         image: toImage(home.testimonials.image),

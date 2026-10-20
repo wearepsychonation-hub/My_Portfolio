@@ -1,6 +1,7 @@
 import { EnvelopeIcon } from "@sanity/icons/Envelope";
 import { defineField, defineType } from "sanity";
-import { ctaLabelField, headlineField, hrefField } from "../shared/fields";
+import { CONTACT_CHANNELS } from "@/lib/contact";
+import { ctaLabelField, headlineField } from "../shared/fields";
 
 export const contactCard = defineType({
   name: "contactCard",
@@ -9,17 +10,12 @@ export const contactCard = defineType({
   icon: EnvelopeIcon,
   fields: [
     defineField({
-      name: "icon",
+      name: "channel",
       type: "string",
-      description: "Generic line icons only; platform logos are not part of the system.",
+      description:
+        "The number, address or handle and the link come from Site settings → Contact, so they're only entered once.",
       options: {
-        list: [
-          { title: "Phone", value: "phone" },
-          { title: "Chat bubble", value: "chat" },
-          { title: "Envelope", value: "mail" },
-          { title: "Camera", value: "camera" },
-          { title: "Map pin", value: "pin" },
-        ],
+        list: Object.entries(CONTACT_CHANNELS).map(([value, { title }]) => ({ title, value })),
         layout: "radio",
         direction: "horizontal",
       },
@@ -30,10 +26,10 @@ export const contactCard = defineType({
       name: "text",
       type: "text",
       rows: 2,
+      description: "One short line. The contact detail is added after it.",
       validation: (rule) => rule.required().max(90),
     }),
     ctaLabelField(),
-    hrefField(),
   ],
-  preview: { select: { title: "title", subtitle: "href" } },
+  preview: { select: { title: "title", subtitle: "channel" } },
 });

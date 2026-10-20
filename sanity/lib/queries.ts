@@ -15,7 +15,7 @@ export const SITE_CONTENT_QUERY = defineQuery(`{
     schedule{ eyebrow, headline, emphasis },
     statement{ headline, lead, paragraphs, emphasis, ctaLabel },
     band{ headline, emphasis, ctaLabel, ctaHref, image${IMAGE} },
-    contact{ eyebrow, headline, emphasis, cards[]{ _key, icon, title, text, ctaLabel, href } },
+    contact{ eyebrow, headline, emphasis, cards[]{ _key, channel, title, text, ctaLabel } },
     testimonials{ eyebrow, image${IMAGE}, "items": items[]->{ _id, quote, name, detail } },
     about{ eyebrow, headline, emphasis, bio, image${IMAGE} },
     gallery[]${IMAGE}
