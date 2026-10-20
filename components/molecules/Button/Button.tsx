@@ -1,5 +1,4 @@
-import Link from "next/link";
-import type { ComponentProps } from "react";
+import { SmartLink, type SmartLinkProps } from "@/components/atoms/SmartLink";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/cn";
 
@@ -20,8 +19,8 @@ export const buttonVariants = cva(
   },
 );
 
-type ButtonProps = ComponentProps<typeof Link> & VariantProps<typeof buttonVariants>;
+type ButtonProps = SmartLinkProps & VariantProps<typeof buttonVariants>;
 
 export function Button({ variant, size, className, ...props }: ButtonProps) {
-  return <Link className={cn(buttonVariants({ variant, size }), className)} {...props} />;
+  return <SmartLink className={cn(buttonVariants({ variant, size }), className)} {...props} />;
 }

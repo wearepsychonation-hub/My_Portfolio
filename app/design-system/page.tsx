@@ -5,6 +5,8 @@ import { PhotoPlaceholder } from "@/components/atoms/PhotoPlaceholder";
 import { SignalDot } from "@/components/atoms/SignalDot";
 import { Button } from "@/components/molecules/Button";
 import { TextLink } from "@/components/molecules/TextLink";
+import { ContactCard } from "@/components/organisms/ContactCard";
+import { seed } from "@/content/seed";
 import { cn } from "@/lib/cn";
 
 export const metadata: Metadata = {
@@ -136,7 +138,18 @@ export default function DesignSystemPage() {
         </div>
       </Section>
 
-      <Section title="Icons and signal.">
+      <Section title="Cards.">
+        <p className="mb-6 max-w-80 text-muted">
+          Hairline border on paper; the border turns ink on hover.
+        </p>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {seed.home.contact.cards.map((c) => (
+            <ContactCard key={c.title} {...c} />
+          ))}
+        </div>
+      </Section>
+
+      <Section title="Icons and signal." tone="off">
         <div className="flex flex-wrap gap-3">
           {iconNames.map((name) => (
             <figure key={name} className="grid w-12 justify-items-center gap-1 border border-hairline py-2 text-ink">
@@ -151,7 +164,7 @@ export default function DesignSystemPage() {
         </p>
       </Section>
 
-      <Section title="Photography." tone="off">
+      <Section title="Photography.">
         <p className="mb-6 max-w-80 text-muted">
           Placeholders until real black and white training photos exist. Photos sit under overlay
           (45%), or overlay-strong (55%) behind long text.

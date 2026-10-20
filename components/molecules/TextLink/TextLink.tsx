@@ -1,11 +1,10 @@
-import Link from "next/link";
-import type { ComponentProps } from "react";
+import { SmartLink, type SmartLinkProps } from "@/components/atoms/SmartLink";
 import { Icon } from "@/components/atoms/Icon";
 import { cn } from "@/lib/cn";
 
-export function TextLink({ className, children, ...props }: ComponentProps<typeof Link>) {
+export function TextLink({ className, children, ...props }: SmartLinkProps) {
   return (
-    <Link
+    <SmartLink
       className={cn(
         "group inline-flex items-center gap-0.75 border-b border-current pb-0.25 label text-ink no-underline",
         className,
@@ -19,6 +18,6 @@ export function TextLink({ className, children, ...props }: ComponentProps<typeo
         stroke={2}
         className="group-hover:translate-x-0.375 transition-transform duration-200"
       />
-    </Link>
+    </SmartLink>
   );
 }

@@ -1,9 +1,9 @@
-import Link from "next/link";
+import { SmartLink } from "@/components/atoms/SmartLink";
 
 export function Wordmark({ name }: { name: string }) {
   return (
-    <Link href="#top" className="wordmark text-on-dark no-underline">
+    <SmartLink href="#top" className="wordmark text-on-dark no-underline">
       {name}
-    </Link>
+    </SmartLink>
   );
 }
