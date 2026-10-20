@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Archivo, Open_Sans } from "next/font/google";
 import { siteUrl } from "@/lib/site";
 import "./globals.css";
@@ -19,6 +19,9 @@ const openSans = Open_Sans({
 });
 
 export const metadata: Metadata = { metadataBase: siteUrl };
+
+// Charcoal, matching the sticky nav, so mobile browser chrome blends into it.
+export const viewport: Viewport = { themeColor: "#1c1c1c" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

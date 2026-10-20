@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { About } from "@/components/sections/About";
 import { ContactRow } from "@/components/sections/ContactRow";
 import { Footer } from "@/components/sections/Footer";
@@ -9,51 +10,37 @@ import { Schedule } from "@/components/sections/Schedule";
 import { Statement } from "@/components/sections/Statement";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Ticker } from "@/components/sections/Ticker";
-import type { Metadata } from "next";
 import { buttonVariants } from "@/components/molecules/Button";
 import { cn } from "@/lib/cn";
 import { getSiteContent } from "@/lib/content";
-import { urlFor } from "@/sanity/lib/image";
+import { businessJsonLd, shareImage, toJsonLdScript } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { seo, home } = await getSiteContent();
-  const share = seo.ogImage ?? home.hero.image;
-  const images = share
-    ? [
-        {
-          url: urlFor(share).width(1200).height(630).fit("crop").url(),
-          width: 1200,
-          height: 630,
-          alt: share.alt,
-        },
-      ]
-    : undefined;
+  const content = await getSiteContent();
+  const { title, description } = content.seo;
+  const share = shareImage(content);
+  const images = share ? [share] : undefined;
 
   return {
-    title: seo.title,
-    description: seo.description,
+    title,
+    description,
     alternates: { canonical: "/" },
-    openGraph: {
-      type: "website",
-      url: "/",
-      title: seo.title,
-      description: seo.description,
-      images,
-    },
-    twitter: {
-      card: images ? "summary_large_image" : "summary",
-      title: seo.title,
-      description: seo.description,
-    },
+    openGraph: { type: "website", url: "/", title, description, images },
+    twitter: { card: share ? "summary_large_image" : "summary", title, description },
   };
 }
 
 export default async function HomePage() {
-  const { brand, nav, home, gyms, slots, today, testimonials } = await getSiteContent();
+  const content = await getSiteContent();
+  const { brand, nav, home, gyms, slots, today, testimonials } = content;
   const footerLinks = nav.filter((l) => l.href !== "#approach");
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: toJsonLdScript(businessJsonLd(content)) }}
+      />
       <a
         href="#main"
         className={cn(
