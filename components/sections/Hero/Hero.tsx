@@ -1,4 +1,3 @@
-import { Reveal } from "@/components/atoms/Reveal";
 import { Button } from "@/components/molecules/Button";
 import { PhotoSection } from "@/components/organisms/PhotoSection";
 import type { HomeContent } from "@/types/content";
@@ -22,7 +21,8 @@ export function Hero({
       priority
       className="flex min-h-80 items-end pt-12 pb-8 sm:min-h-95 sm:pt-16 sm:pb-12"
     >
-      <Reveal className="shell">
+      {/* No reveal: the headline is the LCP element and must paint immediately. */}
+      <div className="shell">
         <span className="mb-2 block label text-on-dark">{eyebrow}</span>
         <h1 className="max-w-112.5 text-display-m text-on-dark sm:text-display-l lg:text-display-xl">
           {headline}
@@ -32,7 +32,7 @@ export function Hero({
         <Button href={bookUrl} variant="light" className="mt-4">
           {ctaLabel}
         </Button>
-      </Reveal>
+      </div>
     </PhotoSection>
   );
 }

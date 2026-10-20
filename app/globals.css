@@ -187,25 +187,31 @@
     radial-gradient(90% 120% at 20% 80%, #5e5e5e 0%, #2c2c2c 55%, #111 100%);
 }
 
-/* Hidden only once JS has flagged <html>, so content never stays invisible without it. */
-.js [data-reveal] {
-  opacity: 0;
-  transform: translateY(calc(var(--spacing) * 2));
-  transition:
-    opacity 700ms var(--ease-reveal),
-    transform 700ms var(--ease-reveal);
+/* Hidden only when scripting is on, so content never depends on JS. Never used above the fold. */
+@media (scripting: enabled) {
+  [data-reveal] {
+    transition:
+      opacity 700ms var(--ease-reveal),
+      transform 700ms var(--ease-reveal);
+  }
+
+  [data-reveal]:not([data-reveal="in"]) {
+    opacity: 0;
+    transform: translateY(calc(var(--spacing) * 2));
+  }
 }
 
-.js [data-reveal="in"] {
-  opacity: 1;
-  transform: none;
+@media print {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .js [data-reveal] {
-    opacity: 1;
-    transform: none;
-    transition: none;
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   *,
