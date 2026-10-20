@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Archivo, Open_Sans } from "next/font/google";
 import Script from "next/script";
-import { seed } from "@/content/seed";
+import { siteUrl } from "@/lib/site";
 import "./globals.css";
 
 const archivo = Archivo({
@@ -19,10 +19,7 @@ const openSans = Open_Sans({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: `${seed.brand.name} · Personal training in ${seed.brand.city}`,
-  description: "One-to-one and small group personal training. Back to basics.",
-};
+export const metadata: Metadata = { metadataBase: siteUrl };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

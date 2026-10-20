@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { seed } from "@/content/seed";
 import { isSanityConfigured } from "@/sanity/env";
 import { client } from "@/sanity/lib/client";
@@ -13,7 +14,7 @@ export const CONTENT_TAG = "sanity";
  * Single entry point for page data. Without Sanity env vars, or before the two singletons are
  * published in a new dataset, the site renders the typed seed instead.
  */
-export async function getSiteContent(): Promise<SiteContent> {
+export const getSiteContent = cache(async (): Promise<SiteContent> => {
   if (!isSanityConfigured) return seed;
 
   const data = await client.fetch<SITE_CONTENT_QUERY_RESULT>(
@@ -23,7 +24,7 @@ export async function getSiteContent(): Promise<SiteContent> {
   );
   if (!data.settings?.nav || !data.home?.hero) return seed;
   return toSiteContent(data.settings, data.home, data);
-}
+});
 
 type Result = NonNullable<SITE_CONTENT_QUERY_RESULT>;
 type Settings = Extract<NonNullable<Result["settings"]>, { nav: unknown[] }>;
