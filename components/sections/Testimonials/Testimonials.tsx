@@ -5,14 +5,15 @@ import { Icon } from "@/components/atoms/Icon";
 import { Reveal } from "@/components/atoms/Reveal";
 import { PhotoSection } from "@/components/organisms/PhotoSection";
 import { cn } from "@/lib/cn";
+import type { HomeContent } from "@/types/content";
 import type { Testimonial } from "@/types/schedule";
 
-type TestimonialsProps = { eyebrow: string; imageAlt: string; items: Testimonial[] };
+type TestimonialsProps = HomeContent["testimonials"] & { items: Testimonial[] };
 
 const FADE_MS = 300;
 const pad = (n: number) => String(n).padStart(2, "0");
 
-export function Testimonials({ eyebrow, imageAlt, items }: TestimonialsProps) {
+export function Testimonials({ eyebrow, image, imageAlt, items }: TestimonialsProps) {
   const [index, setIndex] = useState(0);
   const [fading, setFading] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
@@ -36,6 +37,7 @@ export function Testimonials({ eyebrow, imageAlt, items }: TestimonialsProps) {
 
   return (
     <PhotoSection
+      image={image}
       imageAlt={imageAlt}
       placeholder="c"
       strong

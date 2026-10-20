@@ -1,3 +1,5 @@
+import type { SiteImage } from "./content";
+
 /** Mirrors design-system/components/index.d.ts. */
 
 /** How a gym is told apart in the schedule. Never by color. */
@@ -13,6 +15,7 @@ export interface Gym {
   tone: GymTone;
   directionsUrl: string;
   bookUrl: string;
+  image?: SiteImage | null;
 }
 
 export interface Slot {

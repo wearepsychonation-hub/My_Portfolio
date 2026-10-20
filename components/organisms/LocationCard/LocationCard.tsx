@@ -1,4 +1,4 @@
-import { PhotoPlaceholder } from "@/components/atoms/PhotoPlaceholder";
+import { Photo } from "@/components/atoms/Photo";
 import { Button } from "@/components/molecules/Button";
 import { Swatch } from "@/components/molecules/Swatch";
 import { TextLink } from "@/components/molecules/TextLink";
@@ -9,9 +9,11 @@ type LocationCardProps = { gym: Gym; placeholder?: "a" | "b" | "c" };
 export function LocationCard({ gym, placeholder = "a" }: LocationCardProps) {
   return (
     <article className="flex flex-col border border-hairline bg-paper transition-colors duration-200 hover:border-ink">
-      <PhotoPlaceholder
-        caption={`${gym.name} exterior`}
-        variant={placeholder}
+      <Photo
+        image={gym.image}
+        imageAlt={`${gym.name} exterior`}
+        sizes="(min-width: 901px) 33vw, 100vw"
+        placeholder={placeholder}
         className="aspect-[16/10]"
       />
       <div className="flex flex-1 flex-col gap-1 p-3">

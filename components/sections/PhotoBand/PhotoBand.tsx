@@ -8,10 +8,12 @@ export function PhotoBand({
   emphasis,
   ctaLabel,
   ctaHref,
+  image,
   imageAlt,
 }: HomeContent["band"]) {
   return (
     <PhotoSection
+      image={image}
       imageAlt={imageAlt}
       placeholder="b"
       className="flex min-h-55 items-center sm:min-h-65"

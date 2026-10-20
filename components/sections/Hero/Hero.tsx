@@ -5,11 +5,21 @@ import type { HomeContent } from "@/types/content";
 
 type HeroProps = HomeContent["hero"] & { bookUrl: string };
 
-export function Hero({ eyebrow, headline, emphasis, ctaLabel, imageAlt, bookUrl }: HeroProps) {
+export function Hero({
+  eyebrow,
+  headline,
+  emphasis,
+  ctaLabel,
+  image,
+  imageAlt,
+  bookUrl,
+}: HeroProps) {
   return (
     <PhotoSection
       id="top"
+      image={image}
       imageAlt={imageAlt}
+      priority
       className="flex min-h-80 items-end pt-12 pb-8 sm:min-h-95 sm:pt-16 sm:pb-12"
     >
       <Reveal className="shell">

@@ -14,6 +14,16 @@ const brand: Brand = {
 
 const digits = (s: string) => s.replace(/[^\d+]/g, "");
 
+/** Plain paragraphs as Portable Text, the shape Sanity returns for the About bio. */
+const toBlocks = (paragraphs: string[]) =>
+  paragraphs.map((text, i) => ({
+    _type: "block",
+    _key: `p${i}`,
+    style: "normal",
+    markDefs: [],
+    children: [{ _type: "span", _key: `p${i}s`, text, marks: [] }],
+  }));
+
 export const seed: SiteContent = {
   brand,
   nav: [
@@ -22,6 +32,10 @@ export const seed: SiteContent = {
     { href: "#about", label: "About" },
     { href: "#contact", label: "Contact" },
   ],
+  seo: {
+    title: `${brand.name} · Personal training in ${brand.city}`,
+    description: "One-to-one and small group personal training. Back to basics.",
+  },
   home: {
     hero: {
       eyebrow: `Personal training · ${brand.city}`,
@@ -92,19 +106,19 @@ export const seed: SiteContent = {
       eyebrow: "About",
       headline: `Hi, I’m ${brand.name}.`,
       emphasis: "I don’t sell transformations. I teach people to train.",
-      paragraphs: [
+      bio: toBlocks([
         `I’ve coached in ${brand.city} for [X] years, across commercial floors, strength gyms and the odd car park at 6am. Before that I was the person at the back of the class, unsure what I was doing and too stubborn to ask.`,
         "That’s the person I build sessions for. We start with how you move today, not how someone on the internet moves. We pick a few things that matter, we do them well, and we add weight when you’ve earned it. Nothing clever. Nothing you can’t keep doing in ten years.",
         "Most of my clients are busy: parents, shift workers, people who’ve tried everything once. They don’t need more motivation. They need a plan, a time and a place. That’s why I train at three gyms across the city — so the closest one is never far.",
         "[Qualifications and certifications.]",
-      ],
+      ]),
       imageAlt: "Coach portrait",
     },
     gallery: [
-      { alt: "Coaching a squat" },
-      { alt: "Kettlebell detail" },
-      { alt: "Group warm-up" },
-      { alt: "Chalk and bar" },
+      { imageAlt: "Coaching a squat" },
+      { imageAlt: "Kettlebell detail" },
+      { imageAlt: "Group warm-up" },
+      { imageAlt: "Chalk and bar" },
     ],
   },
   gyms: [
