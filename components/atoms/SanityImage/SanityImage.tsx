@@ -1,6 +1,4 @@
-"use client";
-
-import Image, { type ImageLoader } from "next/image";
+import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { cn } from "@/lib/cn";
 import type { SiteImage } from "@/types/content";
@@ -8,27 +6,22 @@ import type { SiteImage } from "@/types/content";
 type SanityImageProps = {
   image: SiteImage;
   sizes: string;
-  priority?: boolean;
+  /** For the LCP image only. */
+  preload?: boolean;
   className?: string;
 };
 
-/** Fills its positioned parent. Sanity's CDN does the resizing; the hotspot sets the focal point. */
-export function SanityImage({ image, sizes, priority, className }: SanityImageProps) {
-  const loader: ImageLoader = ({ width, quality }) =>
-    urlFor(image)
-      .width(width)
-      .quality(quality ?? 75)
-      .url();
+/** Fills its positioned parent. The loader file sizes it on Sanity's CDN; the hotspot sets the focal point. */
+export function SanityImage({ image, sizes, preload, className }: SanityImageProps) {
   const { hotspot, asset } = image;
 
   return (
     <Image
-      loader={loader}
-      src={asset._id}
+      src={urlFor(image).url()}
       alt={image.alt}
       fill
       sizes={sizes}
-      priority={priority}
+      preload={preload}
       placeholder={asset.lqip ? "blur" : "empty"}
       blurDataURL={asset.lqip ?? undefined}
       // The system is monochrome; photos render desaturated whatever the upload.

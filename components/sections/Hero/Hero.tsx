@@ -18,7 +18,7 @@ export function Hero({
       id="top"
       image={image}
       imageAlt={imageAlt}
-      priority
+      preload
       className="flex min-h-80 items-end pt-12 pb-8 sm:min-h-95 sm:pt-16 sm:pb-12"
     >
       {/* No reveal: the headline is the LCP element and must paint immediately. */}

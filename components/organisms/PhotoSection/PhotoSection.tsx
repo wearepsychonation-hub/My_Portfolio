@@ -12,7 +12,7 @@ type PhotoSectionProps = HTMLAttributes<HTMLElement> & {
   /** overlay-strong, for long text on the photo. */
   strong?: boolean;
   /** For the hero, the page's LCP image. */
-  priority?: boolean;
+  preload?: boolean;
 };
 
 const placeholders = { a: "", b: "ph-b", c: "ph-c" };
@@ -23,7 +23,7 @@ export function PhotoSection({
   imageAlt,
   placeholder = "a",
   strong,
-  priority,
+  preload,
   className,
   children,
   ...props
@@ -42,7 +42,7 @@ export function PhotoSection({
         <SanityImage
           image={{ ...image, alt: image.alt || imageAlt }}
           sizes="100vw"
-          priority={priority}
+          preload={preload}
           className="-z-2"
         />
       )}
