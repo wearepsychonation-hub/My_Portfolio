@@ -26,7 +26,7 @@ const docs = [
     _id: "siteSettings",
     _type: "siteSettings",
     ...brand,
-    nav: nav.map((l, i) => ({ _type: "navLink", _key: `nav${i}`, ...l })),
+    nav: nav.map(({ key, ...l }) => ({ _type: "navLink", _key: key, ...l })),
     seo: { _type: "seo", title: seo.title, description: seo.description },
   },
   {

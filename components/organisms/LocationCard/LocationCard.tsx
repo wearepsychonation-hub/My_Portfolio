@@ -1,10 +1,11 @@
 import { Photo } from "@/components/atoms/Photo";
+import type { PlaceholderVariant } from "@/components/atoms/PhotoPlaceholder";
 import { Button } from "@/components/molecules/Button";
 import { Swatch } from "@/components/molecules/Swatch";
 import { TextLink } from "@/components/molecules/TextLink";
 import type { Gym } from "@/types/schedule";
 
-type LocationCardProps = { gym: Gym; placeholder?: "a" | "b" | "c" };
+type LocationCardProps = { gym: Gym; placeholder?: PlaceholderVariant };
 
 export function LocationCard({ gym, placeholder = "a" }: LocationCardProps) {
   return (

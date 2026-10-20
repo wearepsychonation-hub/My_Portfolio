@@ -1,11 +1,10 @@
 import { cn } from "@/lib/cn";
+import { TONE_FILL } from "@/lib/schedule";
 import type { GymTone } from "@/types/schedule";
 
 const tones: Record<GymTone | "full", string> = {
-  solid: "bg-ink border-ink",
-  outline: "bg-paper border-ink",
-  tint: "bg-mist border-mist",
-  full: "bg-paper border-ink swatch-hatch",
+  ...TONE_FILL,
+  full: "border-ink bg-paper swatch-hatch",
 };
 
 export function Swatch({ tone }: { tone: GymTone | "full" }) {

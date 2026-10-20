@@ -10,8 +10,10 @@ export interface SiteImage {
 }
 
 export interface NavLink {
+  key: string;
   href: string;
   label: string;
+  inFooter: boolean;
 }
 
 export type ContactChannel = "phone" | "whatsapp" | "email" | "instagram";
@@ -51,7 +53,7 @@ export interface HomeContent {
     emphasis: string;
     bio: PortableTextBlock[];
   };
-  gallery: Photographic[];
+  gallery: (Photographic & { key: string })[];
 }
 
 export interface Seo {

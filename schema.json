@@ -87,6 +87,13 @@
             "type": "string"
           },
           "optional": false
+        },
+        "inFooter": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
         }
       }
     }

@@ -1,5 +1,9 @@
 import type { HTMLAttributes } from "react";
-import { PhotoCaption } from "@/components/atoms/PhotoPlaceholder";
+import {
+  PhotoCaption,
+  PLACEHOLDER_VARIANTS,
+  type PlaceholderVariant,
+} from "@/components/atoms/PhotoPlaceholder";
 import { SanityImage } from "@/components/atoms/SanityImage";
 import { cn } from "@/lib/cn";
 import type { SiteImage } from "@/types/content";
@@ -8,14 +12,12 @@ type PhotoSectionProps = HTMLAttributes<HTMLElement> & {
   image?: SiteImage | null;
   /** Alt text fallback; also the placeholder caption until a photo is set. */
   imageAlt: string;
-  placeholder?: "a" | "b" | "c";
+  placeholder?: PlaceholderVariant;
   /** overlay-strong, for long text on the photo. */
   strong?: boolean;
   /** For the hero, the page's LCP image. */
   preload?: boolean;
 };
-
-const placeholders = { a: "", b: "ph-b", c: "ph-c" };
 
 /** Full-bleed photo ground under an overlay, with on-dark text and focus rings. */
 export function PhotoSection({
@@ -32,7 +34,7 @@ export function PhotoSection({
     <section
       className={cn(
         "photo-overlay surface-dark",
-        image ? "bg-charcoal" : ["ph", placeholders[placeholder]],
+        image ? "bg-charcoal" : ["ph", PLACEHOLDER_VARIANTS[placeholder]],
         strong && "photo-overlay-strong",
         className,
       )}

@@ -16,7 +16,7 @@ export function TextLink({ className, children, ...props }: SmartLinkProps) {
         name="arrow"
         size={12}
         stroke={2}
-        className="group-hover:translate-x-0.375 transition-transform duration-200"
+        className="transition-transform duration-200 group-hover:translate-x-0.5"
       />
     </SmartLink>
   );

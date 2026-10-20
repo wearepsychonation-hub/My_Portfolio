@@ -33,7 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function HomePage() {
   const content = await getSiteContent();
   const { brand, nav, home, gyms, slots, today, testimonials } = content;
-  const footerLinks = nav.filter((l) => l.href !== "#approach");
+  const footerLinks = nav.filter((l) => l.inFooter);
 
   return (
     <>

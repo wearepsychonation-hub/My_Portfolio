@@ -1,4 +1,4 @@
-import type { DayKey, Gym, Slot } from "@/types/schedule";
+import type { DayKey, Gym, GymTone, Slot } from "@/types/schedule";
 
 export const DAYS: { key: DayKey; short: string; long: string }[] = [
   { key: "mon", short: "Mon", long: "Monday" },
@@ -11,6 +11,13 @@ export const DAYS: { key: DayKey; short: string; long: string }[] = [
 ];
 
 export type GymFilter = "all" | Gym["id"];
+
+/** Fill and border per gym tone, shared by schedule slots and legend swatches. */
+export const TONE_FILL: Record<GymTone, string> = {
+  solid: "border-ink bg-ink",
+  outline: "border-ink bg-paper",
+  tint: "border-mist bg-mist",
+};
 
 /** The viewer's weekday. Client only: the server can't know the viewer's timezone. */
 export function currentDayKey(): DayKey {

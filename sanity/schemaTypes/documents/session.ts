@@ -1,15 +1,8 @@
 import { ClockIcon } from "@sanity/icons/Clock";
 import { defineField, defineType } from "sanity";
+import { DAYS } from "@/lib/schedule";
 
-export const DAY_OPTIONS = [
-  { title: "Monday", value: "mon" },
-  { title: "Tuesday", value: "tue" },
-  { title: "Wednesday", value: "wed" },
-  { title: "Thursday", value: "thu" },
-  { title: "Friday", value: "fri" },
-  { title: "Saturday", value: "sat" },
-  { title: "Sunday", value: "sun" },
-];
+export const DAY_OPTIONS = DAYS.map((d) => ({ title: d.long, value: d.key }));
 
 const TIME = /^([01]\d|2[0-3]):[0-5]\d$/;
 
@@ -90,7 +83,7 @@ export const session = defineType({
       full: "fullyBooked",
     },
     prepare: ({ day, start, end, gym, type, full }) => ({
-      title: `${DAY_OPTIONS.find((d) => d.value === day)?.title.slice(0, 3) ?? "New"} ${start ?? "--:--"}–${end ?? "--:--"}`,
+      title: `${DAYS.find((d) => d.key === day)?.short ?? "New"} ${start ?? "--:--"}–${end ?? "--:--"}`,
       subtitle: [gym, type, full && "Fully booked"].filter(Boolean).join(" · "),
     }),
   },

@@ -2,6 +2,7 @@
 
 import { useState, useSyncExternalStore, type ReactNode } from "react";
 import { Icon } from "@/components/atoms/Icon";
+import { placeholderAt } from "@/components/atoms/PhotoPlaceholder";
 import { Reveal } from "@/components/atoms/Reveal";
 import { SignalDot } from "@/components/atoms/SignalDot";
 import { Swatch } from "@/components/molecules/Swatch";
@@ -19,7 +20,6 @@ type ScheduleBoardProps = {
   today?: DayKey;
 };
 
-const placeholders = ["a", "b", "c"] as const;
 const noop = () => () => {};
 
 export function ScheduleBoard({ header, gyms, slots, today: pinned }: ScheduleBoardProps) {
@@ -134,11 +134,7 @@ export function ScheduleBoard({ header, gyms, slots, today: pinned }: ScheduleBo
           {gyms
             .filter((g) => filter === "all" || g.id === filter)
             .map((g) => (
-              <LocationCard
-                key={g.id}
-                gym={g}
-                placeholder={placeholders[gyms.indexOf(g) % placeholders.length]}
-              />
+              <LocationCard key={g.id} gym={g} placeholder={placeholderAt(gyms.indexOf(g))} />
             ))}
         </div>
       </Reveal>

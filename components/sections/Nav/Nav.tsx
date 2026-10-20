@@ -32,7 +32,7 @@ export function Nav({ name, links, bookUrl }: NavProps) {
         <nav aria-label="Main" className="hidden md:block">
           <ul className="flex items-center gap-4">
             {links.map((l) => (
-              <li key={l.href}>
+              <li key={l.key}>
                 <SmartLink
                   href={l.href}
                   className="label text-on-dark-muted transition-colors duration-200 hover:text-on-dark"
@@ -69,7 +69,7 @@ export function Nav({ name, links, bookUrl }: NavProps) {
       >
         <ul className="shell pt-2 pb-3">
           {links.map((l) => (
-            <li key={l.href}>
+            <li key={l.key}>
               <SmartLink
                 href={l.href}
                 onClick={close}

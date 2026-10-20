@@ -1,13 +1,7 @@
 import { Icon } from "@/components/atoms/Icon";
 import { cn } from "@/lib/cn";
-import { DAYS } from "@/lib/schedule";
+import { DAYS, TONE_FILL } from "@/lib/schedule";
 import type { Gym, Slot as SlotData } from "@/types/schedule";
-
-const tones = {
-  solid: "border-ink bg-ink text-paper",
-  outline: "border-ink bg-paper text-ink",
-  tint: "border-mist bg-mist text-ink",
-};
 
 type SlotProps = {
   slot: SlotData;
@@ -23,7 +17,8 @@ export function Slot({ slot, gym, layout = "column" }: SlotProps) {
 
   const className = cn(
     "group relative border no-underline transition-colors duration-200",
-    tones[gym.tone],
+    TONE_FILL[gym.tone],
+    gym.tone === "solid" ? "text-paper" : "text-ink",
     row
       ? "grid grid-cols-[112px_minmax(0,1fr)] gap-x-2 gap-y-0.5 p-2 pr-5"
       : "flex min-h-14 flex-col gap-0.5 p-1.5",

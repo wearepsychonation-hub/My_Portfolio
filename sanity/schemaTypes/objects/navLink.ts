@@ -10,6 +10,12 @@ export const navLink = defineType({
   fields: [
     defineField({ name: "label", type: "string", validation: (rule) => rule.required().max(20) }),
     hrefField(),
+    defineField({
+      name: "inFooter",
+      title: "Show in footer",
+      type: "boolean",
+      initialValue: true,
+    }),
   ],
   preview: { select: { title: "label", subtitle: "href" } },
 });

@@ -27,6 +27,7 @@ export type NavLink = {
   _type: "navLink";
   label: string;
   href: string;
+  inFooter?: boolean;
 };
 
 export type Seo = {
@@ -357,7 +358,7 @@ export type AllSanitySchemaTypes =
 
 // Source: sanity/lib/queries.ts
 // Variable: SITE_CONTENT_QUERY
-// Query: {  "settings": *[_type == "siteSettings" && _id == "siteSettings"][0]{    name, city, phone, whatsapp, email, instagram, bookUrl,    nav[]{ _key, label, href },    seo{ title, description, ogImage{ "asset": asset->{ _id, "lqip": metadata.lqip }, alt, hotspot, crop } }  },  "home": *[_type == "homePage" && _id == "homePage"][0]{    hero{ eyebrow, headline, emphasis, ctaLabel, image{ "asset": asset->{ _id, "lqip": metadata.lqip }, alt, hotspot, crop } },    ticker,    schedule{ eyebrow, headline, emphasis },    statement{ headline, lead, paragraphs, emphasis, ctaLabel },    band{ headline, emphasis, ctaLabel, ctaHref, image{ "asset": asset->{ _id, "lqip": metadata.lqip }, alt, hotspot, crop } },    contact{ eyebrow, headline, emphasis, cards[]{ _key, channel, title, text, ctaLabel } },    testimonials{ eyebrow, image{ "asset": asset->{ _id, "lqip": metadata.lqip }, alt, hotspot, crop }, "items": items[]->{ _id, quote, name, detail } },    about{ eyebrow, headline, emphasis, bio, image{ "asset": asset->{ _id, "lqip": metadata.lqip }, alt, hotspot, crop } },    gallery[]{ "asset": asset->{ _id, "lqip": metadata.lqip }, alt, hotspot, crop }  },  "gyms": *[_type == "gym"] | order(order asc, name asc){    _id, name, neighborhood, address, tone, directionsUrl, bookUrl, image{ "asset": asset->{ _id, "lqip": metadata.lqip }, alt, hotspot, crop }  },  "slots": *[_type == "session" && defined(gym)] | order(start asc){    _id, day, start, end, "gym": gym._ref, type, fullyBooked  }}
+// Query: {  "settings": *[_type == "siteSettings" && _id == "siteSettings"][0]{    name, city, phone, whatsapp, email, instagram, bookUrl,    nav[]{ _key, label, href, inFooter },    seo{ title, description, ogImage{ "asset": asset->{ _id, "lqip": metadata.lqip }, alt, hotspot, crop } }  },  "home": *[_type == "homePage" && _id == "homePage"][0]{    hero{ eyebrow, headline, emphasis, ctaLabel, image{ "asset": asset->{ _id, "lqip": metadata.lqip }, alt, hotspot, crop } },    ticker,    schedule{ eyebrow, headline, emphasis },    statement{ headline, lead, paragraphs, emphasis, ctaLabel },    band{ headline, emphasis, ctaLabel, ctaHref, image{ "asset": asset->{ _id, "lqip": metadata.lqip }, alt, hotspot, crop } },    contact{ eyebrow, headline, emphasis, cards[]{ _key, channel, title, text, ctaLabel } },    testimonials{ eyebrow, image{ "asset": asset->{ _id, "lqip": metadata.lqip }, alt, hotspot, crop }, "items": items[]->{ _id, quote, name, detail } },    about{ eyebrow, headline, emphasis, bio, image{ "asset": asset->{ _id, "lqip": metadata.lqip }, alt, hotspot, crop } },    gallery[]{ _key, "asset": asset->{ _id, "lqip": metadata.lqip }, alt, hotspot, crop }  },  "gyms": *[_type == "gym"] | order(order asc, name asc){    _id, name, neighborhood, address, tone, directionsUrl, bookUrl, image{ "asset": asset->{ _id, "lqip": metadata.lqip }, alt, hotspot, crop }  },  "slots": *[_type == "session" && defined(gym)] | order(start asc){    _id, day, start, end, "gym": gym._ref, type, fullyBooked  }}
 export type SITE_CONTENT_QUERY_RESULT = {
   settings: {
     name: string;
@@ -371,6 +372,7 @@ export type SITE_CONTENT_QUERY_RESULT = {
       _key: string;
       label: string;
       href: string;
+      inFooter: boolean | null;
     }>;
     seo: {
       title: string;
@@ -493,6 +495,7 @@ export type SITE_CONTENT_QUERY_RESULT = {
       } | null;
     };
     gallery: Array<{
+      _key: string;
       asset: {
         _id: string;
         lqip: string | null;

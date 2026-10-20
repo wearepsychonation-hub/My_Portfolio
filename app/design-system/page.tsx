@@ -175,7 +175,7 @@ export default function DesignSystemPage() {
             <Slot key={g.id} gym={g} slot={{ ...sample, gym: g.id }} layout="row" />
           ))}
           <Slot gym={gyms[2]!} slot={{ ...sample, full: true }} layout="row" />
-          <OffDay text="Not at [GYM B] today." layout="row" />
+          <OffDay text={`Not at ${gyms[1]!.name} today.`} layout="row" />
         </div>
         <div className="label-s mt-6 flex flex-wrap items-center gap-x-3 gap-y-2 text-muted">
           {gyms.map((g) => (

@@ -1,4 +1,4 @@
-import { PhotoPlaceholder } from "@/components/atoms/PhotoPlaceholder";
+import { PhotoPlaceholder, type PlaceholderVariant } from "@/components/atoms/PhotoPlaceholder";
 import { SanityImage } from "@/components/atoms/SanityImage";
 import { cn } from "@/lib/cn";
 import type { SiteImage } from "@/types/content";
@@ -8,7 +8,7 @@ type PhotoProps = {
   /** Alt text fallback and placeholder caption. */
   imageAlt: string;
   sizes: string;
-  placeholder?: "a" | "b" | "c";
+  placeholder?: PlaceholderVariant;
   /** Sizing for the frame, e.g. an aspect ratio. */
   className?: string;
 };

@@ -12,7 +12,7 @@ export function Footer({ name, city, links }: FooterProps) {
         <nav aria-label="Footer" className="flex gap-3 label">
           {links.map((l) => (
             <SmartLink
-              key={l.href}
+              key={l.key}
               href={l.href}
               className="text-on-dark-muted transition-colors duration-200 hover:text-on-dark"
             >

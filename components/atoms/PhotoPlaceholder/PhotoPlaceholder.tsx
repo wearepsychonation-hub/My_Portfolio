@@ -1,10 +1,15 @@
 import { cn } from "@/lib/cn";
 
-const variants = { a: "", b: "ph-b", c: "ph-c" };
+/** Three gray placeholder grounds, so neighbouring photo slots don't look identical. */
+export const PLACEHOLDER_VARIANTS = { a: "", b: "ph-b", c: "ph-c" } as const;
+export type PlaceholderVariant = keyof typeof PLACEHOLDER_VARIANTS;
+
+const order = Object.keys(PLACEHOLDER_VARIANTS) as PlaceholderVariant[];
+export const placeholderAt = (index: number) => order[index % order.length]!;
 
 type PhotoPlaceholderProps = {
   caption: string;
-  variant?: keyof typeof variants;
+  variant?: PlaceholderVariant;
   className?: string;
 };
 
@@ -13,7 +18,7 @@ export function PhotoPlaceholder({ caption, variant = "a", className }: PhotoPla
     <div
       role="img"
       aria-label={caption}
-      className={cn("relative overflow-hidden ph", variants[variant], className)}
+      className={cn("relative overflow-hidden ph", PLACEHOLDER_VARIANTS[variant], className)}
     >
       <PhotoCaption caption={caption} className="left-2" />
     </div>

@@ -25,10 +25,10 @@ const toBlocks = (paragraphs: string[]) =>
 export const seed: SiteContent = {
   brand,
   nav: [
-    { href: "#schedule", label: "Schedule" },
-    { href: "#approach", label: "Approach" },
-    { href: "#about", label: "About" },
-    { href: "#contact", label: "Contact" },
+    { key: "nav-schedule", href: "#schedule", label: "Schedule", inFooter: true },
+    { key: "nav-approach", href: "#approach", label: "Approach", inFooter: false },
+    { key: "nav-about", href: "#about", label: "About", inFooter: true },
+    { key: "nav-contact", href: "#contact", label: "Contact", inFooter: true },
   ],
   seo: {
     title: `${brand.name} · Personal training in ${brand.city}`,
@@ -113,10 +113,10 @@ export const seed: SiteContent = {
       imageAlt: "Coach portrait",
     },
     gallery: [
-      { imageAlt: "Coaching a squat" },
-      { imageAlt: "Kettlebell detail" },
-      { imageAlt: "Group warm-up" },
-      { imageAlt: "Chalk and bar" },
+      { key: "gallery-1", imageAlt: "Coaching a squat" },
+      { key: "gallery-2", imageAlt: "Kettlebell detail" },
+      { key: "gallery-3", imageAlt: "Group warm-up" },
+      { key: "gallery-4", imageAlt: "Chalk and bar" },
     ],
   },
   gyms: [

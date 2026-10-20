@@ -52,7 +52,12 @@ function toSiteContent(settings: Settings, home: Home, { gyms, slots }: Result):
       instagram: settings.instagram,
       bookUrl: settings.bookUrl,
     },
-    nav: settings.nav.map(({ label, href }) => ({ label, href })),
+    nav: settings.nav.map(({ _key, label, href, inFooter }) => ({
+      key: _key,
+      label,
+      href,
+      inFooter: inFooter ?? true,
+    })),
     seo: {
       title: settings.seo?.title ?? `${settings.name} · Personal training in ${settings.city}`,
       description: settings.seo?.description ?? seed.seo.description,
@@ -78,7 +83,8 @@ function toSiteContent(settings: Settings, home: Home, { gyms, slots }: Result):
         image: toImage(home.about.image),
         imageAlt: fallback.about.imageAlt,
       },
-      gallery: (home.gallery ?? []).map((image, i) => ({
+      gallery: (home.gallery ?? []).map(({ _key, ...image }, i) => ({
+        key: _key,
         image: toImage(image),
         imageAlt: fallback.gallery[i]?.imageAlt ?? "Training",
       })),
