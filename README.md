@@ -76,7 +76,7 @@ git push -u origin main
    - `NEXT_PUBLIC_SANITY_DATASET` = `production`
    - `NEXT_PUBLIC_SANITY_API_VERSION` = `2026-10-01`
    - `SANITY_REVALIDATE_SECRET`: a long random string, used again in step 5
-   - `NEXT_PUBLIC_SITE_URL`: the final domain, e.g. `https://example.com`. Vercel's production URL is used if it's unset.
+   - `NEXT_PUBLIC_SITE_URL`: the final domain, e.g. `https://example.com`. Vercel's (or Netlify's) production URL is used if it's unset.
    - `SANITY_API_READ_TOKEN`: only if the dataset is private
 3. Deploy, then add the production URL (and any custom domain) to Sanity **CORS origins** with credentials on.
 
