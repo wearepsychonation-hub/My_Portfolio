@@ -1,5 +1,6 @@
 import { SearchIcon } from "@sanity/icons/Search";
 import { defineField, defineType } from "sanity";
+import { BRAND_TOKENS_HINT } from "../shared/fields";
 
 export const seo = defineType({
   name: "seo",
@@ -10,7 +11,7 @@ export const seo = defineType({
     defineField({
       name: "title",
       type: "string",
-      description: "Browser tab and search result title.",
+      description: `Browser tab and search result title. ${BRAND_TOKENS_HINT}`,
       validation: (rule) =>
         rule.required().max(60).warning("Search engines cut titles after ~60 characters."),
     }),

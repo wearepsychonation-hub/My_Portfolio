@@ -9,6 +9,7 @@ import { StarIcon } from "@sanity/icons/Star";
 import { UserIcon } from "@sanity/icons/User";
 import { defineArrayMember, defineField, defineType } from "sanity";
 import {
+  BRAND_TOKENS_HINT,
   ctaLabelField,
   emphasisField,
   eyebrowField,
@@ -58,7 +59,7 @@ export const homePage = defineType({
       title: "Ticker",
       type: "string",
       group: "hero",
-      description: "The black strip under the hero, next to the pin icon.",
+      description: `The black strip under the hero, next to the pin icon. ${BRAND_TOKENS_HINT}`,
       validation: (rule) => rule.required().max(60),
     }),
     section("schedule", "Schedule heading", [eyebrowField(), headlineField(), emphasisField()]),
@@ -125,6 +126,7 @@ export const homePage = defineType({
       emphasisField(),
       defineField({
         name: "bio",
+        description: BRAND_TOKENS_HINT,
         type: "array",
         of: [
           defineArrayMember({

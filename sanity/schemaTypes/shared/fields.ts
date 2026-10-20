@@ -1,5 +1,8 @@
 import { defineField, type StringRule } from "sanity";
 
+/** Copy fields can say {name} and {city}; lib/content.ts fills them from Site settings. */
+export const BRAND_TOKENS_HINT = "Type {name} or {city} to use the values from Site settings.";
+
 /** Voice rules from design-system/README.md, surfaced as warnings so editors can still save. */
 function voice(rule: StringRule) {
   return rule.custom((value) => {
@@ -15,7 +18,7 @@ export const headlineField = (name = "headline", title = "Headline") =>
     name,
     title,
     type: "string",
-    description: "Sentence case, ending with a period. For example: Back to basics.",
+    description: `Sentence case, ending with a period. For example: Back to basics. ${BRAND_TOKENS_HINT}`,
     validation: (rule) => [rule.required(), voice(rule).warning()],
   });
 
@@ -23,8 +26,7 @@ export const eyebrowField = () =>
   defineField({
     name: "eyebrow",
     type: "string",
-    description:
-      "Small uppercase label above the headline. Typed in sentence case; shown uppercase.",
+    description: `Small uppercase label above the headline. Typed in sentence case; shown uppercase. ${BRAND_TOKENS_HINT}`,
     validation: (rule) => rule.required().max(40),
   });
 
@@ -33,8 +35,7 @@ export const emphasisField = () =>
     name: "emphasis",
     title: "Italic line",
     type: "string",
-    description:
-      "One italic line under the headline. For example: Your body. Your goals. Your lifestyle.",
+    description: `One italic line under the headline. For example: Your body. Your goals. Your lifestyle. ${BRAND_TOKENS_HINT}`,
     validation: (rule) => [
       rule.required(),
       rule.max(90).warning("Keep the italic line to one short sentence."),

@@ -5,6 +5,7 @@ import { client } from "@/sanity/lib/client";
 import { SITE_CONTENT_QUERY } from "@/sanity/lib/queries";
 import type { SITE_CONTENT_QUERY_RESULT } from "@/sanity.types";
 import type { SiteContent, SiteImage } from "@/types/content";
+import type { Brand } from "@/types/schedule";
 
 /** Revalidated on a timer and on demand via /api/revalidate (tag "sanity"). */
 export const CONTENT_REVALIDATE_SECONDS = 60;
@@ -15,6 +16,24 @@ export const CONTENT_TAG = "sanity";
  * published in a new dataset, the site renders the typed seed instead.
  */
 export const getSiteContent = cache(async (): Promise<SiteContent> => {
+  const content = await loadContent();
+  const { brand } = content;
+  return { ...content, seo: fillBrand(content.seo, brand), home: fillBrand(content.home, brand) };
+});
+
+/** Copy can say {name} and {city}, so both are only typed once, in Site settings. */
+function fillBrand<T>(value: T, brand: Brand): T {
+  if (typeof value === "string") {
+    return value.replaceAll("{name}", brand.name).replaceAll("{city}", brand.city) as T;
+  }
+  if (Array.isArray(value)) return value.map((v) => fillBrand(v, brand)) as T;
+  if (value && typeof value === "object") {
+    return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, fillBrand(v, brand)])) as T;
+  }
+  return value;
+}
+
+async function loadContent(): Promise<SiteContent> {
   if (!isSanityConfigured) return seed;
 
   const data = await client.fetch<SITE_CONTENT_QUERY_RESULT>(
@@ -24,7 +43,7 @@ export const getSiteContent = cache(async (): Promise<SiteContent> => {
   );
   if (!data.settings?.nav || !data.home?.hero) return seed;
   return toSiteContent(data.settings, data.home, data);
-});
+}
 
 type Result = NonNullable<SITE_CONTENT_QUERY_RESULT>;
 type Settings = Extract<NonNullable<Result["settings"]>, { nav: unknown[] }>;
@@ -59,7 +78,7 @@ function toSiteContent(settings: Settings, home: Home, { gyms, slots }: Result):
       inFooter: inFooter ?? true,
     })),
     seo: {
-      title: settings.seo?.title ?? `${settings.name} · Personal training in ${settings.city}`,
+      title: settings.seo?.title ?? seed.seo.title,
       description: settings.seo?.description ?? seed.seo.description,
       ogImage: toImage(settings.seo?.ogImage),
     },

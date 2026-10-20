@@ -1,7 +1,10 @@
 import type { SiteContent } from "@/types/content";
 import type { Brand } from "@/types/schedule";
 
-/** Every bracketed placeholder lives here. Replace before launch. */
+/**
+ * Every bracketed placeholder lives here. Replace before launch.
+ * Copy uses {name} and {city}; lib/content.ts fills them from `brand`.
+ */
 const brand: Brand = {
   name: "[NAME]",
   city: "[CITY]",
@@ -31,18 +34,18 @@ export const seed: SiteContent = {
     { key: "nav-contact", href: "#contact", label: "Contact", inFooter: true },
   ],
   seo: {
-    title: `${brand.name} · Personal training in ${brand.city}`,
+    title: "{name} · Personal training in {city}",
     description: "One-to-one and small group personal training. Back to basics.",
   },
   home: {
     hero: {
-      eyebrow: `Personal training · ${brand.city}`,
+      eyebrow: "Personal training · {city}",
       headline: "Back to basics.",
       emphasis: "Your body. Your goals. Your lifestyle.",
       ctaLabel: "Start today",
       imageAlt: "Action shot, gym floor",
     },
-    ticker: `Personal training across ${brand.city}`,
+    ticker: "Personal training across {city}",
     schedule: {
       eyebrow: "Schedule",
       headline: "Where to find me.",
@@ -102,10 +105,10 @@ export const seed: SiteContent = {
     testimonials: { eyebrow: "Clients", imageAlt: "Dark, low-key portrait" },
     about: {
       eyebrow: "About",
-      headline: `Hi, I’m ${brand.name}.`,
+      headline: "Hi, I’m {name}.",
       emphasis: "I don’t sell transformations. I teach people to train.",
       bio: toBlocks([
-        `I’ve coached in ${brand.city} for [X] years, across commercial floors, strength gyms and the odd car park at 6am. Before that I was the person at the back of the class, unsure what I was doing and too stubborn to ask.`,
+        "I’ve coached in {city} for [X] years, across commercial floors, strength gyms and the odd car park at 6am. Before that I was the person at the back of the class, unsure what I was doing and too stubborn to ask.",
         "That’s the person I build sessions for. We start with how you move today, not how someone on the internet moves. We pick a few things that matter, we do them well, and we add weight when you’ve earned it. Nothing clever. Nothing you can’t keep doing in ten years.",
         "Most of my clients are busy: parents, shift workers, people who’ve tried everything once. They don’t need more motivation. They need a plan, a time and a place. That’s why I train at three gyms across the city — so the closest one is never far.",
         "[Qualifications and certifications.]",
