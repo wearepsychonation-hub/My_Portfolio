@@ -56,8 +56,9 @@ export function ScheduleBoard({ header, gyms, slots, today: pinned }: ScheduleBo
         <div
           role="group"
           aria-label="Filter by location"
-          // Tabs bleed to the screen edge on mobile so they can scroll sideways.
-          className="-mx-3 flex w-[calc(100%+48px)] [scrollbar-width:none] overflow-x-auto px-3 sm:mx-0 sm:w-auto sm:px-0"
+          // Tabs bleed to the screen edge on mobile so they can scroll sideways. The vertical padding
+          // keeps the 2px + 3px focus ring inside the scroller, which would otherwise clip it.
+          className="-mx-3 -my-0.75 flex w-[calc(100%+48px)] [scrollbar-width:none] overflow-x-auto px-3 py-0.75 sm:mx-0 sm:w-auto sm:overflow-visible sm:px-0"
         >
           {tabs.map((t, i) => (
             <button
@@ -95,7 +96,7 @@ export function ScheduleBoard({ header, gyms, slots, today: pinned }: ScheduleBo
             const count = slotsForDay(slots, d.key, filter).length;
             return (
               <details key={d.key} open={d.key === today} className="group border-t border-ink">
-                {/* 18px row padding gives a 56px tap target, as in the reference. */}
+                {/* 18px row padding matches the reference: a 52px tap target. */}
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-2 py-2.25 text-ink [&::-webkit-details-marker]:hidden">
                   <span className="label">{d.long}</span>
                   <span className="inline-flex items-center gap-2 text-muted">

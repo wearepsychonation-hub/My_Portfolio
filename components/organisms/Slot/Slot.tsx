@@ -1,5 +1,6 @@
 import { Icon } from "@/components/atoms/Icon";
 import { cn } from "@/lib/cn";
+import { DAYS } from "@/lib/schedule";
 import type { Gym, Slot as SlotData } from "@/types/schedule";
 
 const tones = {
@@ -24,7 +25,7 @@ export function Slot({ slot, gym, layout = "column" }: SlotProps) {
     "group relative border no-underline transition-colors duration-200",
     tones[gym.tone],
     row
-      ? "grid grid-cols-[112px_minmax(0,1fr)] gap-x-2 gap-y-0.5 p-2"
+      ? "grid grid-cols-[112px_minmax(0,1fr)] gap-x-2 gap-y-0.5 p-2 pr-5"
       : "flex min-h-14 flex-col gap-0.5 p-1.5",
     slot.full ? "slot-hatch cursor-not-allowed" : gym.tone === "outline" && "hover:bg-off-white",
   );
@@ -53,7 +54,8 @@ export function Slot({ slot, gym, layout = "column" }: SlotProps) {
     <a
       href={gym.bookUrl}
       className={className}
-      aria-label={`Book ${slot.type} at ${gym.name}, ${time}`}
+      // The visual day is the column or row heading; links read out of context need it spelled out.
+      aria-label={`Book ${slot.type} at ${gym.name}, ${DAYS.find((d) => d.key === slot.day)?.long} ${time}`}
     >
       {content}
       <Icon

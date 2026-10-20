@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Icon } from "@/components/atoms/Icon";
 import { Reveal } from "@/components/atoms/Reveal";
 import { PhotoSection } from "@/components/organisms/PhotoSection";
@@ -17,16 +17,25 @@ export function Testimonials({ eyebrow, image, imageAlt, items }: TestimonialsPr
   const [index, setIndex] = useState(0);
   const [fading, setFading] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
+  // Taps during a fade add up here, so two quick taps move two slides.
+  const pending = useRef(0);
+  useEffect(() => () => clearTimeout(timer.current), []);
+
   const current = items[index];
   if (!current) return null;
 
+  const advance = (step: number) =>
+    setIndex((i) => (((i + step) % items.length) + items.length) % items.length);
+
   const go = (step: number) => {
-    const next = (index + step + items.length) % items.length;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return setIndex(next);
-    clearTimeout(timer.current);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return advance(step);
+    pending.current += step;
+    if (timer.current) return;
     setFading(true);
     timer.current = setTimeout(() => {
-      setIndex(next);
+      advance(pending.current);
+      pending.current = 0;
+      timer.current = undefined;
       setFading(false);
     }, FADE_MS);
   };

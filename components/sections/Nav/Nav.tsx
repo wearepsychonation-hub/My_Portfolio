@@ -1,7 +1,7 @@
 "use client";
 
 import { SmartLink } from "@/components/atoms/SmartLink";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Icon } from "@/components/atoms/Icon";
 import { Wordmark } from "@/components/atoms/Wordmark";
 import { Button } from "@/components/molecules/Button";
@@ -11,6 +11,18 @@ type NavProps = { name: string; links: NavLink[]; bookUrl: string };
 
 export function Nav({ name, links, bookUrl }: NavProps) {
   const [open, setOpen] = useState(false);
+  const toggle = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      setOpen(false);
+      toggle.current?.focus();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [open]);
   const close = () => setOpen(false);
 
   return (
@@ -37,8 +49,10 @@ export function Nav({ name, links, bookUrl }: NavProps) {
           </ul>
         </nav>
         <button
+          ref={toggle}
           type="button"
-          className="-mr-1 p-1 text-on-dark md:hidden"
+          // 10px padding around the 24px icon: a 44px touch target.
+          className="-mr-1.25 p-1.25 text-on-dark md:hidden"
           aria-expanded={open}
           aria-controls="mobile-nav"
           aria-label={open ? "Close menu" : "Open menu"}
