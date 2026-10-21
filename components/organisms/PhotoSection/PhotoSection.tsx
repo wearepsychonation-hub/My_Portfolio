@@ -1,9 +1,5 @@
 import type { HTMLAttributes } from "react";
-import {
-  PhotoCaption,
-  PLACEHOLDER_VARIANTS,
-  type PlaceholderVariant,
-} from "@/components/atoms/PhotoPlaceholder";
+import { PLACEHOLDER_VARIANTS, type PlaceholderVariant } from "@/components/atoms/PhotoPlaceholder";
 import { SanityImage } from "@/components/atoms/SanityImage";
 import { cn } from "@/lib/cn";
 import type { SiteImage } from "@/types/content";
@@ -49,7 +45,6 @@ export function PhotoSection({
         />
       )}
       {children}
-      {!image && <PhotoCaption />}
     </section>
   );
 }
