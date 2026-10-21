@@ -49,7 +49,7 @@ export function PhotoSection({
         />
       )}
       {children}
-      {!image && <PhotoCaption caption={imageAlt} className="right-3 bottom-2" />}
+      {!image && <PhotoCaption />}
     </section>
   );
 }

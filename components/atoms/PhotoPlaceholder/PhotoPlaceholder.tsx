@@ -20,22 +20,22 @@ export function PhotoPlaceholder({ caption, variant = "a", className }: PhotoPla
       aria-label={caption}
       className={cn("relative overflow-hidden ph", PLACEHOLDER_VARIANTS[variant], className)}
     >
-      <PhotoCaption caption={caption} className="left-2" />
+      <PhotoCaption />
     </div>
   );
 }
 
-/** "Photo · …" tag shown on placeholders; remove alongside them. */
-export function PhotoCaption({ caption, className }: { caption: string; className?: string }) {
+/** "Coming soon" tag shown on placeholders; remove alongside them. */
+export function PhotoCaption({ className }: { className?: string }) {
   return (
     <span
       aria-hidden="true"
       className={cn(
-        "pointer-events-none absolute bottom-1.5 z-3 label-s text-on-dark-muted",
+        "pointer-events-none absolute inset-0 z-3 flex items-center justify-center text-label font-bold tracking-label text-on-dark-muted uppercase sm:text-[13px]",
         className,
       )}
     >
-      Photo · {caption}
+      Coming soon
     </span>
   );
 }
