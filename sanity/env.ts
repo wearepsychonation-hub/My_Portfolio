@@ -4,7 +4,8 @@ const clean = (value: string | undefined) => value?.trim() || undefined;
 const API_VERSION = /^\d{4}-\d{2}-\d{2}$/;
 const rawApiVersion = clean(process.env.NEXT_PUBLIC_SANITY_API_VERSION);
 
-export const projectId = clean(process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) ?? "";
+// Sanity project IDs are always lowercase; a mistyped capital letter points at a project that doesn't exist.
+export const projectId = clean(process.env.NEXT_PUBLIC_SANITY_PROJECT_ID)?.toLowerCase() ?? "";
 export const dataset = clean(process.env.NEXT_PUBLIC_SANITY_DATASET) ?? "production";
 // A malformed version makes createClient throw at build time, so fall back rather than fail the deploy.
 if (rawApiVersion && !API_VERSION.test(rawApiVersion))
